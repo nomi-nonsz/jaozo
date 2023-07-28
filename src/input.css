@@ -1,0 +1,8 @@
+:root {
+    --background-primary: #01001E;
+    background-color: var(--background-primary);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
