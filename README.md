@@ -1,3 +1,38 @@
+# Jaozo
+
+Jaozo is the anime streaming-like for fun. Jaozo is actually not made for watch anime but only showing lists of anime.
+
+Anime database from [MyAnimeList](https://myanimelist.net/) with special search API from [Jikan API](https://jikan.moe/). Initial purpose of making this website is for a self-taught front-end marathon project. This project was made with React + Vite and TailwindCSS.
+
+### Usage
+this project uses yarn for the script package so it affects the guide, maybe you are familiar with yarn even if you use npm or pnpm
+
+1. Just clone this repository and then
+
+    ```
+    cd jaozo
+    ```
+2. install dependencies
+
+    ```
+    yarn
+    ```
+3. run
+    ```
+    yarn dev
+    ```
+
+### Additional scripts
+
+- ### twatch
+    
+    TailwindCSS tool that scan template files for classes and build CSS. it run `tailwindcss -i ./src/input.css -o ./src/App.css --watch`
+
+    ```
+    yarn twatch
+    ```
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
