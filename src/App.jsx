@@ -5,11 +5,13 @@ import {
   Route
 } from 'react-router-dom'
 import './App.css'
+import Navbar from './assets/components/Navbar'
 import Landing from './assets/pages/landing'
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path='/' element={ <Landing /> } />
       </Routes>

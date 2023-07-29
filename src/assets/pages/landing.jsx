@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../../App.css'
-import Navbar from '../components/navbar'
+import Navbar from '../components/Navbar'
 import Logo from '../components/icons/Logo'
 import SearchBar from '../components/SearchBar'
 import OButton from '../components/buttons/OButton'
@@ -12,14 +12,16 @@ function Landing() {
 
   return (
     <main className='text-white'>
-      <Navbar />
-      <div className="pt-40 flex flex-col gap-8 px-8 md:px-60 lg:px-20">
+      <div className="py-24 flex flex-col gap-8 px-8 md:px-60 lg:px-20">
         <header className='text-center flex flex-col gap-8'>
           <Logo center={true} />
           <div className="font-montserrat font-bold text-lg">The anime streaming-like for fun i guess</div>
         </header>
         <div className="text-center gap-2">
-          <SearchBar placeholder="Type anime like One Piece, Jujutsu Kaisen..." />
+          <SearchBar
+            placeholder="Type anime like One Piece, Jujutsu Kaisen..."
+            theme='original'
+            />
           <OButton click={() => navigate("/home")} className="mt-4">
             Home
           </OButton>

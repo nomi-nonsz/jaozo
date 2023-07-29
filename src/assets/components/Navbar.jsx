@@ -1,5 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "./icons/Logo";
+import SearchBar from "./SearchBar";
 
 function Navbar () {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ function Navbar () {
     ]
 
     return (
-        <div className="py-7 px-8 md:px-60 lg:px-20 flex justify-between items-center">
+        <nav className="py-7 px-8 md:px-60 lg:px-20 flex justify-between items-center">
             <Link to="/">
                 <Logo width={74.7} />
             </Link>
@@ -33,13 +34,15 @@ function Navbar () {
                     return (
                         <button
                             className="text-lg text-white text-opacity-80 hover:text-opacity-100 transition duration-300"
+                            onClick={() => navigate(p.url)}
                             key={k}>
                             {p.name}
                         </button>
                     )
                 })}
+                <SearchBar placeholder="One Piece, Naruto..." theme='darked' />
             </div>
-        </div>
+        </nav>
     )
 }
 

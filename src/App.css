@@ -579,28 +579,12 @@ video {
   width: 24rem;
 }
 
-.w-full{
-  width: 100%;
-}
-
-.w-4\/5{
-  width: 80%;
-}
-
-.w-3\/5{
-  width: 60%;
-}
-
-.w-1\/2{
-  width: 50%;
-}
-
 .w-auto{
   width: auto;
 }
 
-.w-3\/4{
-  width: 75%;
+.w-full{
+  width: 100%;
 }
 
 .flex-row{
@@ -698,9 +682,9 @@ video {
   padding-right: 3.5rem;
 }
 
-.px-20{
-  padding-left: 5rem;
-  padding-right: 5rem;
+.px-8{
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .py-4{
@@ -708,29 +692,19 @@ video {
   padding-bottom: 1rem;
 }
 
-.py-6{
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-
 .py-7{
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
 }
 
-.px-2{
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+.py-32{
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 
-.px-6{
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-.px-8{
-  padding-left: 2rem;
-  padding-right: 2rem;
+.py-24{
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 .pb-1{
@@ -746,12 +720,25 @@ video {
   padding-top: 10rem;
 }
 
+.pt-32{
+  padding-top: 8rem;
+}
+
+.ps-0{
+  -webkit-padding-start: 0px;
+          padding-inline-start: 0px;
+}
+
 .text-center{
   text-align: center;
 }
 
 .font-montserrat{
   font-family: montserrat, sans-serif;
+}
+
+.font-noto-sans{
+  font-family: noto sans, sans-serif;
 }
 
 .text-lg{
@@ -781,6 +768,11 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-pit-primary{
+  --tw-text-opacity: 1;
+  color: rgb(174 171 255 / var(--tw-text-opacity));
 }
 
 .text-opacity-80{
@@ -836,6 +828,10 @@ video {
   background-color: rgb(73 67 255 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-transparent:hover{
+  background-color: transparent;
+}
+
 .hover\:text-border-primary:hover{
   --tw-text-opacity: 1;
   color: rgb(73 67 255 / var(--tw-text-opacity));
@@ -846,14 +842,6 @@ video {
 }
 
 @media (min-width: 768px){
-  .md\:w-auto{
-    width: auto;
-  }
-
-  .md\:w-1\/2{
-    width: 50%;
-  }
-
   .md\:px-60{
     padding-left: 15rem;
     padding-right: 15rem;
@@ -861,18 +849,6 @@ video {
 }
 
 @media (min-width: 1024px){
-  .lg\:w-96{
-    width: 24rem;
-  }
-
-  .lg\:w-auto{
-    width: auto;
-  }
-
-  .lg\:w-3\/4{
-    width: 75%;
-  }
-
   .lg\:w-1\/2{
     width: 50%;
   }
@@ -887,10 +863,6 @@ video {
   .xl\:mx-52{
     margin-left: 13rem;
     margin-right: 13rem;
-  }
-
-  .xl\:w-1\/4{
-    width: 25%;
   }
 
   .xl\:w-2\/6{
