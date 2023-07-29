@@ -10,6 +10,8 @@ function Navbar () {
         navItems: "text-white text-opacity-80 hover:text-opacity-100 transition duration-300"
     }
 
+    // the template
+    // templatenya
     const pages = [
         {
             name: 'Home',
@@ -32,8 +34,10 @@ function Navbar () {
             child: null
         },
     ]
-    const [rpages, setPages] = useState(pages);
+    const [rpages, setPages] = useState([]);
 
+    // tryna get genres
+    // nyoba ngambil genre
     const getGenres = async () => {
         try {
             const response = await axios.get(`https://api.jikan.moe/v4/genres/anime`);
@@ -46,15 +50,8 @@ function Navbar () {
 
                 throw new Error(`${type}: (${status}) ${message}`);
             }
-
-            const genres = data.data.filter(val => val.count > 1500);
-
-            genres.forEach(v => {
-                const genre_name = v.name;
-                const genre_url = `/genre/${genre_name.toLowerCase()}`.replace(/\s+/g, "-");
-
-                pages[1].child.push({ name: genre_name, url: genre_url });
-            });
+            
+            return data;
         }
         catch (error) {
             console.error("Something is wrong when trying get anime genres data");
@@ -63,12 +60,19 @@ function Navbar () {
     }
 
     useEffect(() => {
-        getGenres().then(() => {
-            setPages(pages);
-            console.log(rpages);
-        });
+        getGenres().then((data) => {
+            const genres = data.data.filter(val => val.count > 1500);
 
-        return;
+            genres.forEach(v => {
+                const genre_name = v.name;
+                const genre_url = `/genre/${genre_name.toLowerCase()}`.replace(/\s+/g, "-");
+
+                pages[1].child.push({ name: genre_name, url: genre_url });
+            });
+            setPages(pages);
+        }).catch((error) => {
+            setPages(pages);
+        });
     }, []);
 
     return (
@@ -80,15 +84,15 @@ function Navbar () {
                 {rpages.map((p, k) => {
                     return (
                         <div
-                            className="text-lg relative"
+                            className="text-lg py-4 relative group"
                             key={k}>
                             <Link to={p.url} className={styles.navItems}>
                                 {p.name}
                             </Link>
                             {p.child && (
-                                <div className="absolute top-14 left-0 w-fit p-4 rounded-lg bg-dark-primary">
+                                <div className="absolute h-0 opacity-0 group-hover:h-fit p-0 group-hover:opacity-100 overflow-y-hidden transition-all duration-100 top-14 left-0 w-fit group-hover:p-5 group-hover:pe-14 rounded-lg bg-dark-primary">
                                     {p.child.map((chi, f) => {
-                                        return <div key={f} className={"font-noto-sans text-base my-1 " + styles.navItems}>{chi.name}</div>
+                                        return <Link key={f} to={chi.url} className={"font-noto-sans text-base my-2 block " + styles.navItems}>{chi.name}</Link>
                                     })}
                                 </div>
                             )}
