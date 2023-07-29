@@ -13,7 +13,7 @@ function Landing() {
   return (
     <main className='text-white'>
       <Navbar />
-      <div className="pt-40 flex flex-col gap-8 md:px-60 px-20">
+      <div className="pt-40 flex flex-col gap-8 px-8 md:px-60 lg:px-20">
         <header className='text-center flex flex-col gap-8'>
           <Logo center={true} />
           <div className="font-montserrat font-bold text-lg">The anime streaming-like for fun i guess</div>
@@ -25,8 +25,8 @@ function Landing() {
           </OButton>
         </div>
         <article className="text-center">
-          <p style={{ width: "540px" }} className='mx-auto'>
-            Anime database from <OLink href="https://myanimelist.net/">MyAnimeList</OLink> with special search API from <OLink href="https://jikan.moe/">Jikan API</OLink>. Initial purpose of making this website is for self-taught project practice.<br/>See source code
+          <p className='mx-auto w-auto lg:w-1/2 xl:w-2/6'>
+            Anime database from <OLink blank={true} href="https://myanimelist.net/">MyAnimeList</OLink> with special search API from <OLink blank={true} href="https://jikan.moe/">Jikan API</OLink>. Initial purpose of making this website is for self-taught project practice.<br/><OLink blank={true} href="https://github.com/norman-andrians/jaozo">See source code</OLink>
           </p>
         </article>
         <article className='bg-orange-500 bg-opacity-30 text-amber-400 xl:mx-52 mx-0 p-4 text-sm border border-orange-600 border-opacity-60 rounded-md'>

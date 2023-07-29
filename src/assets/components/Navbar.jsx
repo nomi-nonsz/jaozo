@@ -24,7 +24,7 @@ function Navbar () {
     ]
 
     return (
-        <div className="py-6 md:px-60 px-20 flex justify-between items-center">
+        <div className="py-7 px-8 md:px-60 lg:px-20 flex justify-between items-center">
             <Link to="/">
                 <Logo width={74.7} />
             </Link>
