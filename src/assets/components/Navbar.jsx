@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import { getGenres } from "../../lib/anime-api";
 import Logo from "./icons/Logo";
 import SearchBar from "./SearchBar";
 
@@ -36,39 +36,9 @@ function Navbar () {
     ]
     const [rpages, setPages] = useState([]);
 
-    // tryna get genres
-    // nyoba ngambil genre
-    const getGenres = async () => {
-        try {
-            const response = await axios.get(`https://api.jikan.moe/v4/genres/anime`);
-            const data = await response.data;
-            
-            if (response.status && response.status != 200) {
-                const status = response.status;
-                const type = response.type;
-                const message = response.message;
-
-                throw new Error(`${type}: (${status}) ${message}`);
-            }
-            
-            return data;
-        }
-        catch (error) {
-            console.error("Something is wrong when trying get anime genres data");
-            console.error(error);
-        }
-    }
-
     useEffect(() => {
         getGenres().then((data) => {
-            const genres = data.data.filter(val => val.count > 1500);
-
-            genres.forEach(v => {
-                const genre_name = v.name;
-                const genre_url = `/genre/${genre_name.toLowerCase()}`.replace(/\s+/g, "-");
-
-                pages[1].child.push({ name: genre_name, url: genre_url });
-            });
+            pages[1].child = data;
             setPages(pages);
         }).catch((error) => {
             setPages(pages);
