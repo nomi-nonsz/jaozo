@@ -27,7 +27,7 @@ export default function SearchBar ({ placeholder, theme }) {
         const query = e.target.q.value;
 
         e.preventDefault();
-        navigate(`/search?q=${encodeURIComponent(query)}`)
+        navigate(`/search?query=${encodeURIComponent(query)}`)
     }
 
     return (
