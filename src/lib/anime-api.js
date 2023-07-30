@@ -43,3 +43,7 @@ export function getGenres () {
             return false;
         })
 }
+
+export function getAnime (id) {
+    return fetchAnime(`https://api.jikan.moe/v4/anime/${id}/full`);
+}

@@ -46,7 +46,7 @@ function Navbar () {
     }, []);
 
     return (
-        <nav className="py-7 px-8 md:px-60 lg:px-20 flex justify-between items-center">
+        <nav className="py-7 px-8 md:px-80 lg:px-20 flex justify-between items-center">
             <Link to="/">
                 <Logo width={74.7} />
             </Link>

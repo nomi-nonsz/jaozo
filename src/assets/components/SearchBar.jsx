@@ -24,7 +24,7 @@ export default function SearchBar ({ placeholder, theme }) {
     }, [theme]);
 
     const handleSearch = (e) => {
-        const query = e.target.q.value;
+        const query = e.target.query.value;
 
         e.preventDefault();
         navigate(`/search?query=${encodeURIComponent(query)}`)
@@ -41,7 +41,7 @@ export default function SearchBar ({ placeholder, theme }) {
                     </button>
                 <input
                     type="text"
-                    name="q"
+                    name="query"
                     placeholder={placeholder}
                     className={inpTheme + " h-full w-full bg-transparent text-white font-noto-sans placeholder:text-sm placeholder:text-pit-primary placeholder:text-opacity-50"}
                 />

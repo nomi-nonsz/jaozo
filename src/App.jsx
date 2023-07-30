@@ -5,8 +5,9 @@ import {
   Route
 } from 'react-router-dom'
 import './App.css'
-import Navbar from './assets/components/Navbar'
+import Navbar from './assets/components/navbar'
 import Landing from './assets/pages/landing'
+import Anime from './assets/pages/anime'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={ <Landing /> } />
+        <Route path='/anime/:animeId' element={ <Anime /> } />
       </Routes>
     </Router>
   )
