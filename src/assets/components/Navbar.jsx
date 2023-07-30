@@ -4,46 +4,11 @@ import { getGenres } from "../../lib/anime-api";
 import Logo from "./icons/Logo";
 import SearchBar from "./SearchBar";
 
-function Navbar () {
+function Navbar ({ pages }) {
     const navigate = useNavigate();
     const styles = {
         navItems: "text-white text-opacity-80 hover:text-opacity-100 transition duration-300"
     }
-
-    // the template
-    // templatenya
-    const pages = [
-        {
-            name: 'Home',
-            url: '/home',
-            child: null
-        },
-        {
-            name: 'Genres',
-            url: '/genre',
-            child: []
-        },
-        {
-            name: 'Theme',
-            url: '/theme',
-            child: null
-        },
-        {
-            name: 'Status',
-            url: '/status',
-            child: null
-        },
-    ]
-    const [rpages, setPages] = useState([]);
-
-    useEffect(() => {
-        getGenres().then((data) => {
-            pages[1].child = data;
-            setPages(pages);
-        }).catch((error) => {
-            setPages(pages);
-        });
-    }, []);
 
     return (
         <nav className="py-7 px-8 md:px-80 lg:px-20 flex justify-between items-center">
@@ -51,7 +16,7 @@ function Navbar () {
                 <Logo width={74.7} />
             </Link>
             <div className="flex gap-20 h-full font-montserrat items-center">
-                {rpages.map((p, k) => {
+                {pages.map((p, k) => {
                     return (
                         <div
                             className="text-lg py-4 relative group"

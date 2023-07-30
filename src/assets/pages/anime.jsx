@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getAnime } from '../../lib/anime-api';
 import AnimeContent from '../components/anime/AnimeContent';
+import Loading from '../components/anime/Loading';
 
 function Anime () {
     const { animeId } = useParams();
@@ -16,7 +17,7 @@ function Anime () {
 
     return (
         <main className="text-white font-noto-sans 2xl:w-xl xl:w-lg lg:w-md md:sm mx-auto">
-            { animeData ? <AnimeContent animeData={animeData} /> : loadingOutput }
+            { animeData ? <AnimeContent animeData={animeData} /> : <Loading /> }
         </main>
     )
 }
