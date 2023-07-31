@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import FButton from '../buttons/FButton';
+import EpisodeGrid from './EpisodeGrid';
 import { ReactComponent as StarIcon } from '../../icons/star.svg';
 import { ReactComponent as PlayIcon } from '../../icons/play.svg';
 import { ReactComponent as MarkIcon } from '../../icons/mark.svg';
 
-function AnimeContent ({animeData}) {
+function AnimeContent ({animeData, episodeData}) {
     const anime = {
         title: animeData.data.title_english ? animeData.data.title_english : animeData.data.title,
         status: animeData.data.status,
@@ -15,11 +16,14 @@ function AnimeContent ({animeData}) {
         rating: animeData.data.rating,
         year: animeData.data.year,
         trailer: animeData.data.trailer.embed_url,
-        trailerImage: animeData.data.trailer.images.medium_image_url
+        trailerImage: animeData.data.trailer.images.medium_image_url,
+        episodes: episodeData.data
     }
 
     const [expandSynopsis, toggleSynopsis] = useState(false);
     const synopsisMaxLength = 150;
+
+    const [expandEpisodes, toggleEpisodes] = useState(false);
 
     function TagsElement ({ children }) {
         return (
@@ -28,7 +32,7 @@ function AnimeContent ({animeData}) {
     }
 
     return (
-    <div className='flex flex-col gap-5'>
+    <div className='flex flex-col gap-6'>
         <section className='flex flex-row gap-8'>
             <div className="relative flex-1 w-[560px] h-[315px]">
                 <iframe
@@ -109,11 +113,11 @@ function AnimeContent ({animeData}) {
                     <div className="font-bold font-noto-sans text-lg">{anime.rating} | {anime.year}</div>
                 </div>
                 <div className="flex flex-row flex-wrap items-center gap-4">
-                    {anime.genres.map(g => {
-                        return <TagsElement>{g.name}</TagsElement>
+                    {anime.genres.map((g, k) => {
+                        return <TagsElement key={k}>{g.name}</TagsElement>
                     })}
-                    {anime.themes.map(t => {
-                        return <TagsElement>{t.name}</TagsElement>
+                    {anime.themes.map((t, k) => {
+                        return <TagsElement key={k}>{t.name}</TagsElement>
                     })}
                 </div>
                 <div className="flex flex-row gap-4">
@@ -126,6 +130,38 @@ function AnimeContent ({animeData}) {
                         <div>Add to list</div>
                     </FButton>
                 </div>
+            </div>
+        </section>
+        <hr />
+        <section className="flex flex-col gap-4">
+            <header>
+                <h2 className='text-xl'>Episodes</h2>
+            </header>
+            <div
+                className={(!expandEpisodes && "hidden-content") + `
+                    relative
+                    flex
+                    flex-row
+                    flex-wrap
+                    gap-4
+                    overflow-y-hidden`}
+                style={{ height: expandEpisodes ? "fit-content" : "480px" }}>
+                { anime.episodes.map((episode, key) => {
+                    return (
+                        <EpisodeGrid
+                            key={key}
+                            id={episode.mal_id}
+                            title={episode.title}
+                            img={anime.trailerImage}
+                            autoWidth={key < anime.episodes.length ? true : false}
+                        />
+                    )
+                }) }
+                {anime.episodes.length >= 8 && 
+                    <button className={"absolute inset-x-0 mx-0 z-10 text-lg text-pit-primary " + (expandEpisodes ? "-bottom-1" : "bottom-5")} onClick={() => { toggleEpisodes(!expandEpisodes) }}>
+                        {expandEpisodes ? "Show less" : "Show more episodes"}
+                    </button>
+                }
             </div>
         </section>
         <hr />

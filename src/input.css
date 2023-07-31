@@ -9,6 +9,9 @@
 hr {
     @apply border-t-border-primary border-opacity-40 w-auto
 }
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold !important;
+}
 @tailwind components;
 @tailwind utilities;
 
@@ -25,6 +28,10 @@ hr {
 }
 .btn-invert-primary:hover {
     @apply bg-primary bg-opacity-10 text-white;
+}
+
+.hidden-content::before {
+    @apply content-[''] absolute top-0 left-0 w-full h-full from-transparent from-60% to-yawn-primary bg-gradient-to-b z-10 pointer-events-none
 }
 
 @screen md {
