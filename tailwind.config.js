@@ -8,11 +8,17 @@ export default {
         'poppins': ['poppins', 'sans-serif'],
         'noto-sans': ['noto sans', 'sans-serif']
       },
+      fontSize: {
+        '3xl': '32px',
+        '4xl': '48px'
+      },
       colors: {
         'primary': "#4200FF",
         'dark-primary': "#000014",
         'border-primary': "#4943FF",
-        'pit-primary': "#AEABFF"
+        'pit-primary': "#AEABFF",
+        'yawn-primary': "#01001E",
+        'gold': "#FF9900"
       },
       width: {
         'xl': '1280px',

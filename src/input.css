@@ -9,6 +9,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn-primary {
+    @apply bg-primary text-white transition duration-200 text-sm font-montserrat font-bold border-2 border-primary;
+}
+.btn-primary:hover {
+    @apply bg-border-primary border-border-primary;
+}
+
+.btn-invert-primary {
+    @apply bg-transparent box-border text-primary transition duration-200 text-sm font-montserrat font-bold border-2 border-primary;
+}
+.btn-invert-primary:hover {
+    @apply bg-primary text-white;
+}
+
 @screen md {
     .base-container { @apply w-sm }
 }
