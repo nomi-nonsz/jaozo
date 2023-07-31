@@ -749,13 +749,11 @@ video {
 }
 
 .ps-0{
-  -webkit-padding-start: 0px;
-          padding-inline-start: 0px;
+  padding-inline-start: 0px;
 }
 
 .ps-5{
-  -webkit-padding-start: 1.25rem;
-          padding-inline-start: 1.25rem;
+  padding-inline-start: 1.25rem;
 }
 
 .text-center{
@@ -847,6 +845,35 @@ video {
   transition-duration: 300ms;
 }
 
+@media (min-width: 768px) {
+  .base-container{
+    width: 640px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .base-container{
+    width: 768px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .base-container{
+    width: 1080px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .base-container{
+    width: 1280px;
+  }
+}
+
+.base-container{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .placeholder\:text-sm::-moz-placeholder{
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -903,8 +930,7 @@ video {
 }
 
 .group:hover .group-hover\:pe-14{
-  -webkit-padding-end: 3.5rem;
-          padding-inline-end: 3.5rem;
+  padding-inline-end: 3.5rem;
 }
 
 .group:hover .group-hover\:opacity-100{
@@ -912,10 +938,6 @@ video {
 }
 
 @media (min-width: 768px){
-  .md\:w-md{
-    width: 768px;
-  }
-
   .md\:px-80{
     padding-left: 20rem;
     padding-right: 20rem;

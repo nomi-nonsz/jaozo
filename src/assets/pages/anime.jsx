@@ -16,7 +16,7 @@ function Anime () {
     }, [animeId]);
 
     return (
-        <main className="text-white font-noto-sans 2xl:w-xl xl:w-lg lg:w-md md:sm mx-auto">
+        <main className="text-white font-noto-sans base-container">
             { animeData ? <AnimeContent animeData={animeData} /> : <Loading /> }
         </main>
     )

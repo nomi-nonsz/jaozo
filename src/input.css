@@ -8,3 +8,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@screen md {
+    .base-container { @apply w-sm }
+}
+@screen lg {
+    .base-container { @apply w-md }
+}
+@screen xl {
+    .base-container { @apply w-lg }
+}
+@screen 2xl {
+    .base-container { @apply w-xl }
+}
+
+
+.base-container {
+    @apply mx-auto;
+}

@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import './App.css'
 import { getGenres } from './lib/anime-api'
-import Navbar from './assets/components/navbar'
+import Navbar from './assets/components/Navbar'
 import Landing from './assets/pages/landing'
 import Anime from './assets/pages/anime'
 

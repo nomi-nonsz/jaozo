@@ -10,8 +10,8 @@ function Landing() {
   const navigate = useNavigate();
 
   return (
-    <main className='text-white'>
-      <div className="py-24 flex flex-col gap-8 px-8 md:px-80 lg:px-20">
+    <main className='text-white base-container'>
+      <div className="py-24 flex flex-col gap-8">
         <header className='text-center flex flex-col gap-8'>
           <Logo center={true} />
           <div className="font-montserrat font-bold text-lg">The anime streaming-like for fun i guess</div>
