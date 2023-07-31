@@ -6,21 +6,25 @@
 }
 
 @tailwind base;
+hr {
+    @apply border-t-border-primary border-opacity-40 w-auto
+}
 @tailwind components;
 @tailwind utilities;
+
 
 .btn-primary {
     @apply bg-primary text-white transition duration-200 text-sm font-montserrat font-bold border-2 border-primary;
 }
 .btn-primary:hover {
-    @apply bg-border-primary border-border-primary;
+    @apply bg-opacity-80;
 }
 
 .btn-invert-primary {
     @apply bg-transparent box-border text-primary transition duration-200 text-sm font-montserrat font-bold border-2 border-primary;
 }
 .btn-invert-primary:hover {
-    @apply bg-primary text-white;
+    @apply bg-primary bg-opacity-10 text-white;
 }
 
 @screen md {

@@ -10,7 +10,7 @@ function FButton ({ mode, onClick, children }) {
     }
 
     return (
-        <button className={`${switches()} px-5 py-4 w-40 flex flex-row rounded-md`} onClick={onClick}>
+        <button className={`${switches()} px-5 py-4 w-40 flex flex-row gap-4 items-center rounded-md`} onClick={onClick}>
             {children}
         </button>
     )
