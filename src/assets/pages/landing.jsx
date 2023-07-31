@@ -26,7 +26,7 @@ function Landing() {
           </OButton>
         </div>
         <article className="text-center">
-          <p className='mx-auto w-auto lg:w-1/2 xl:w-2/6'>
+          <p className='mx-auto w-auto lg:w-3/4 xl:w-1/2'>
             Anime database from <OLink blank={true} href="https://myanimelist.net/">MyAnimeList</OLink> with special search API from <OLink blank={true} href="https://jikan.moe/">Jikan API</OLink>. Initial purpose of making this website is for self-taught project practice.<br/><OLink blank={true} href="https://github.com/norman-andrians/jaozo">See source code</OLink>
           </p>
         </article>

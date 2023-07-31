@@ -30,7 +30,7 @@ function AnimeContent ({animeData}) {
     return (
     <div className='flex flex-col gap-5'>
         <section className='flex flex-row gap-8'>
-            <div className="relative w-[560px] h-[315px]">
+            <div className="relative flex-1 w-[560px] h-[315px]">
                 <iframe
                     className="rounded-xl absolute z-10 w-full h-full"
                     src={anime.trailer}
@@ -54,8 +54,23 @@ function AnimeContent ({animeData}) {
                         background: `url('${anime.trailerImage}')`
                     }}
                 ></div>
+                <div
+                    className={`
+                        absolute
+                        top-0
+                        left-0
+                        rounded-xl
+                        bg-cover
+                        bg-no-repeat
+                        w-full
+                        h-full
+                    `}
+                    style={{
+                        backgroundImage: `url('${anime.trailerImage}')`
+                    }}
+                ></div>
             </div>
-            <div className="text-white flex flex-col gap-4">
+            <div className="text-white flex-1 flex flex-col gap-4">
                 <header className='font-bold font-montserrat'>
                     <div className="text-3xl">
                         {anime.title}
@@ -64,7 +79,7 @@ function AnimeContent ({animeData}) {
                 </header>
                 <div className="font-noto-sans">
                     <article className="relative">
-                        <p className={expandSynopsis && `
+                        <p className={!expandSynopsis && `
                             before:content-['']
                             before:absolute
                             before:bottom-0
@@ -74,6 +89,7 @@ function AnimeContent ({animeData}) {
                             before:from-transparent
                             before:to-yawn-primary
                             before:bg-gradient-to-b
+                            before:pointer-events-none
                         `}>
                             {!expandSynopsis ? 
                                 anime.synopsis.length > synopsisMaxLength ? anime.synopsis.slice(0, synopsisMaxLength) + "..." : anime.synopsis :
@@ -92,7 +108,7 @@ function AnimeContent ({animeData}) {
                     </div>
                     <div className="font-bold font-noto-sans text-lg">{anime.rating} | {anime.year}</div>
                 </div>
-                <div className="flex flex-row items-center gap-4">
+                <div className="flex flex-row flex-wrap items-center gap-4">
                     {anime.genres.map(g => {
                         return <TagsElement>{g.name}</TagsElement>
                     })}

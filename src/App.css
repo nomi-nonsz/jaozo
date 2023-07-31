@@ -567,6 +567,18 @@ hr{
   top: 3.5rem;
 }
 
+.top-\[600px\]{
+  top: 600px;
+}
+
+.top-\[320px\]{
+  top: 320px;
+}
+
+.top-\[325px\]{
+  top: 325px;
+}
+
 .z-10{
   z-index: 10;
 }
@@ -618,6 +630,10 @@ hr{
   height: 100%;
 }
 
+.max-h-\[315px\]{
+  max-height: 315px;
+}
+
 .w-16{
   width: 4rem;
 }
@@ -655,6 +671,38 @@ hr{
   width: 100%;
 }
 
+.w-\[660px\]{
+  width: 660px;
+}
+
+.max-w-\[560px\]{
+  max-width: 560px;
+}
+
+.flex-1{
+  flex: 1 1 0%;
+}
+
+.flex-auto{
+  flex: 1 1 auto;
+}
+
+.flex-initial{
+  flex: 0 1 auto;
+}
+
+.flex-none{
+  flex: none;
+}
+
+.flex-grow{
+  flex-grow: 1;
+}
+
+.grow{
+  flex-grow: 1;
+}
+
 .scale-110{
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
@@ -671,6 +719,10 @@ hr{
 
 .flex-col{
   flex-direction: column;
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
 }
 
 .items-center{
@@ -795,6 +847,14 @@ hr{
 
 .bg-opacity-30{
   --tw-bg-opacity: 0.3;
+}
+
+.bg-cover{
+  background-size: cover;
+}
+
+.bg-no-repeat{
+  background-repeat: no-repeat;
 }
 
 .p-0{
@@ -1102,6 +1162,11 @@ hr{
   --tw-text-opacity: 0.5;
 }
 
+.before\:pointer-events-none::before{
+  content: var(--tw-content);
+  pointer-events: none;
+}
+
 .before\:absolute::before{
   content: var(--tw-content);
   position: absolute;
@@ -1200,6 +1265,10 @@ hr{
     width: 50%;
   }
 
+  .lg\:w-3\/4{
+    width: 75%;
+  }
+
   .lg\:px-20{
     padding-left: 5rem;
     padding-right: 5rem;
@@ -1214,5 +1283,9 @@ hr{
 
   .xl\:w-2\/6{
     width: 33.333333%;
+  }
+
+  .xl\:w-1\/2{
+    width: 50%;
   }
 }
