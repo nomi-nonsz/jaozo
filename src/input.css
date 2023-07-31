@@ -22,6 +22,17 @@
     .base-container { @apply w-xl }
 }
 
+@keyframes towew {
+    0% {
+        transform: scale(0.9, 1) translateY(-4px);
+    }
+    50% {
+        transform: scale(1, .8) translateY(4px);
+    }
+    100% {
+        transform: scale(0.9, 1) translateY(-4px);
+    }
+}
 
 .base-container {
     @apply mx-auto;

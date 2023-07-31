@@ -20,6 +20,9 @@ export default {
         'md': '768px',
         'sm': '640px',
         'xm': '480px'
+      },
+      animation: {
+        'img-loading': 'towew .3s infinite',
       }
     },
   },

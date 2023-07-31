@@ -17,7 +17,7 @@ function Anime () {
 
     return (
         <main className="text-white font-noto-sans base-container">
-            { animeData ? <AnimeContent animeData={animeData} /> : <Loading /> }
+            { animeData ? <AnimeContent animeData={animeData} /> : <Loading /> }    
         </main>
     )
 }
