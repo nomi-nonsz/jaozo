@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Home",
+        "url": "/anime",
+        "child": null
+    },
+    {
+        "name": "Genres",
+        "url": "/genre",
+        "child": []
+    },
+    {
+        "name": "Theme",
+        "url": "/theme",
+        "child": null
+    },
+    {
+        "name": "Status",
+        "url": "/status",
+        "child": [
+            {
+                "name": "Upcoming",
+                "url": "/status/upcoming"
+            },
+            {
+                "name": "Curreintly Aired",
+                "url": "/status/aired"
+            },
+            {
+                "name": "Finished Aired",
+                "url": "/status/finished"
+            }
+        ]
+    }
+]

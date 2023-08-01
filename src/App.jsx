@@ -11,45 +11,10 @@ import Footer from './assets/components/Footer'
 import Landing from './assets/pages/landing'
 import Anime from './assets/pages/anime'
 import Search from './assets/pages/search'
+import pages from './assets/data/pages.json';
 
 function App() {
   const [rpages, setPages] = useState([]);
-  
-  const pages = [
-    {
-        name: 'Home',
-        url: '/anime',
-        child: null
-    },
-    {
-        name: 'Genres',
-        url: '/genre',
-        child: []
-    },
-    {
-        name: 'Theme',
-        url: '/theme',
-        child: null
-    },
-    {
-        name: 'Status',
-        url: '/status',
-        child: [
-          {
-            name: 'Upcoming',
-            url: '/status/upcoming'
-          },
-          {
-            name: 'Curreintly Aired',
-            url: '/status/aired'
-          },
-          {
-            name: 'Finished Aired',
-            url: '/status/finished'
-          }
-        ]
-    },
-  ]
 
   // inget ini belum direkomendasikan
   // variabel useState pages, pages, request useEffect ini sudah seharusnya ditempatkan lagi di komponen Navbar
