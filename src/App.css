@@ -551,6 +551,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold !important;
 }
 
+.fixed{
+  position: fixed;
+}
+
 .absolute{
   position: absolute;
 }
@@ -594,6 +598,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .z-10{
   z-index: 10;
+}
+
+.z-50{
+  z-index: 50;
 }
 
 .col-span-3{
@@ -742,6 +750,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .w-10{
   width: 2.5rem;
+}
+
+.w-screen{
+  width: 100vw;
 }
 
 .flex-1{

@@ -140,9 +140,8 @@ function AnimeContent ({animeData, episodeData}) {
             <div
                 className={(!expandEpisodes && "hidden-content") + `
                     relative
-                    flex
-                    flex-row
-                    flex-wrap
+                    grid
+                    grid-cols-4
                     gap-4
                     overflow-y-hidden`}
                 style={{ height: expandEpisodes ? "fit-content" : "480px" }}>
@@ -153,7 +152,6 @@ function AnimeContent ({animeData, episodeData}) {
                             id={episode.mal_id}
                             title={episode.title}
                             img={anime.trailerImage}
-                            autoWidth={key < anime.episodes.length ? true : false}
                         />
                     )
                 }) }
