@@ -2,22 +2,36 @@ import axios from "axios";
 
 async function fetchAnime (url) {
     try {
+        console.log(`Make request for ${url}`)
         const response = await axios.get(url);
+        console.log(`Get data from response`);
         const data = await response.data;
         
-        if (response.status && response.status != 200) {
-            const status = response.status;
-            const type = response.type;
-            const message = response.message;
+        if (response.status != 200 && data) {
+            const status = data.status;
+            const type = data.type;
+            const message = data.message;
     
             throw new Error(`${type}: (${status}) ${message}`);
         }
+
+        console.log(`Successful fetching data`);
         
         return data;
     }
     catch (error) {
-        console.error("Something is wrong when trying get anime data");
-        console.error(error);
+        if (error.response) {
+            const status = error.response.status;
+            const message = error.message;
+
+            if (status == 429) {
+                console.error(`GET::${url}. Error Status: ${status}`);
+                console.error(`<${status}> Too Many Request! You can't make another request in such a short time. \n\n${message}`);
+            }
+        }
+        else {
+            console.error("Something is wrong when trying get anime data");
+        }
     }
 }
 
@@ -50,4 +64,12 @@ export function getEpisodeById (id) {
 
 export function getAnime (id) {
     return fetchAnime(`https://api.jikan.moe/v4/anime/${id}/full`);
+}
+
+export function getTrendingAnime () {
+    return fetchAnime(`https://api.jikan.moe/v4/seasons/now?limit=10`);
+}
+
+export function findAnime (query) {
+    return fetchAnime(`https://api.jikan.moe/v4/anime?q="${query}"`);
 }

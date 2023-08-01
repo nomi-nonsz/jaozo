@@ -27,7 +27,7 @@ function Anime () {
 
     return (
         <main className="text-white font-noto-sans base-container">
-            { dataExist ? <AnimeContent animeData={animeData} episodeData={episodeData} /> : <Loading /> }    
+            { dataExist ? <AnimeContent animeData={animeData} episodeData={episodeData} /> : <Loading>Fetching Data</Loading> }    
         </main>
     )
 }

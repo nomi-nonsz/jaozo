@@ -9,6 +9,7 @@ import { getGenres } from './lib/anime-api'
 import Navbar from './assets/components/Navbar'
 import Landing from './assets/pages/landing'
 import Anime from './assets/pages/anime'
+import Search from './assets/pages/search'
 
 function App() {
   const [rpages, setPages] = useState([]);
@@ -66,6 +67,7 @@ function App() {
       <Navbar pages={rpages} />
       <Routes>
         <Route path='/' element={ <Landing /> } />
+        <Route path='/search' element={ <Search /> } />
         <Route path='/anime/:animeId' element={ <Anime /> } />
       </Routes>
     </Router>
