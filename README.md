@@ -9,17 +9,21 @@ this project uses yarn for the script package so it affects the guide, maybe you
 
 1. Just clone this repository and then
 
-    ```
+    ```bash
     cd jaozo
     ```
 2. install dependencies
 
-    ```
+    ```bash
     yarn
     ```
-3. run
-    ```
+3. run project
+    ```bash
     yarn dev
+    ```
+4. build css (run on another terminal)
+    ```bash
+    yarn twatch
     ```
 
 ### Additional scripts

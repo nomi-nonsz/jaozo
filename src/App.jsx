@@ -4,7 +4,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
-import './App.css'
+import './dist/main.css';
 import { getGenres } from './lib/anime-api'
 import Navbar from './assets/components/Navbar'
 import Footer from './assets/components/Footer'

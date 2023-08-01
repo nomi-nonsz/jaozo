@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import '../../App.css'
+import '../../dist/main.css'
 import Logo from '../components/icons/Logo'
 import SearchBar from '../components/SearchBar'
 import OButton from '../components/buttons/OButton'
