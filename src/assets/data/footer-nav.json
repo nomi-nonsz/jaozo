@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Pages",
+        "navs": [
+            {
+                "name": "Home",
+                "url": "/anime"
+            },
+            {
+                "name": "Genres",
+                "url": "/genre"
+            },
+            {
+                "name": "Theme",
+                "url": "/theme"
+            },
+            {
+                "name": "Status",
+                "url": "/status"
+            }
+        ]
+    },
+    {
+        "name": "Follow Me :3",
+        "navs": [
+            {
+                "name": "Twitter",
+                "url": "https://twitter.com/@NormanAndrins"
+            },
+            {
+                "name": "Facebook",
+                "url": "https://www.facebook.com/norman.andrians"
+            },
+            {
+                "name": "Instagram",
+                "url": "https://www.instagram.com/normanandrians25/"
+            },
+            {
+                "name": "Github",
+                "url": "https://github.com/norman-andrians"
+            }
+        ]
+    }
+]

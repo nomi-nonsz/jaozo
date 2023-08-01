@@ -7,6 +7,7 @@ import {
 import './App.css'
 import { getGenres } from './lib/anime-api'
 import Navbar from './assets/components/Navbar'
+import Footer from './assets/components/Footer'
 import Landing from './assets/pages/landing'
 import Anime from './assets/pages/anime'
 import Search from './assets/pages/search'
@@ -70,6 +71,7 @@ function App() {
         <Route path='/search' element={ <Search /> } />
         <Route path='/anime/:animeId' element={ <Anime /> } />
       </Routes>
+      <Footer />
     </Router>
   )
 }
