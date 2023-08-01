@@ -6,6 +6,7 @@ import Loading from '../components/anime/Loading';
 
 function Anime () {
     const { animeId } = useParams();
+    const [dataExist, setExist] = useState(false);
     const [animeData, setData] = useState(null);
     const [episodeData, setEpisode] = useState(null);
 
@@ -19,9 +20,15 @@ function Anime () {
         });
     }, [animeId]);
 
+    useEffect(() => {
+        if (animeData && episodeData) {
+            setExist(true);
+        }
+    }, [animeData, episodeData]);
+
     return (
         <main className="text-white font-noto-sans base-container">
-            { animeData && episodeData ? <AnimeContent animeData={animeData} episodeData={episodeData} /> : <Loading /> }    
+            { dataExist ? <AnimeContent animeData={animeData} episodeData={episodeData} /> : <Loading /> }    
         </main>
     )
 }
