@@ -14,7 +14,6 @@ function Anime () {
         getAnime(animeId).then(res => {
             setData(res);
         });
-
         getEpisodeById(animeId).then(res => {
             setEpisode(res);
         });

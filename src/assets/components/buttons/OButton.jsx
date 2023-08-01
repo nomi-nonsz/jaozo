@@ -6,8 +6,8 @@ export default function OButton ({ click, className, children }) {
             className={
                 `btn-primary
                 py-4
-                px-14
-                rounded-sm ` + className
+                px-10
+                rounded-lg ` + className
             }
             onClick={click}
         >

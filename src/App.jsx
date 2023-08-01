@@ -16,7 +16,7 @@ function App() {
   const pages = [
     {
         name: 'Home',
-        url: '/home',
+        url: '/anime',
         child: null
     },
     {
@@ -32,7 +32,20 @@ function App() {
     {
         name: 'Status',
         url: '/status',
-        child: null
+        child: [
+          {
+            name: 'Upcoming',
+            url: '/status/upcoming'
+          },
+          {
+            name: 'Curreintly Aired',
+            url: '/status/aired'
+          },
+          {
+            name: 'Finished Aired',
+            url: '/status/finished'
+          }
+        ]
     },
   ]
 

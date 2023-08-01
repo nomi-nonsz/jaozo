@@ -21,8 +21,8 @@ function Landing() {
             placeholder="Type anime like One Piece, Jujutsu Kaisen..."
             theme='original'
             />
-          <OButton click={() => navigate("/home")} className="mt-4">
-            Home
+          <OButton click={() => navigate("/anime")} className="mt-4">
+            Browse Anime
           </OButton>
         </div>
         <article className="text-center">
