@@ -32,6 +32,8 @@ async function fetchAnime (url) {
         else {
             console.error("Something is wrong when trying get anime data");
         }
+
+        throw error;
     }
 }
 
@@ -71,5 +73,5 @@ export function getTrendingAnime () {
 }
 
 export function findAnime (query) {
-    return fetchAnime(`https://api.jikan.moe/v4/anime?q="${query}"`);
+    return fetchAnime(`https://api.jikan.moe/v4/anime?q="${query}"`).catch(error => error);
 }

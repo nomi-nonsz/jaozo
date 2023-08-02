@@ -13,27 +13,32 @@ function Search () {
     const [animeData, setData] = useState(null);
     const [trendAnime, setTrend] = useState(null);
 
-    async function fetchData () {
-        const trendData = await getTrendingAnime();
-        
-        setTimeout(async() => {
-            const resultData = await findAnime(query);
+    const [error, setError] = useState(null);
 
-            setTrend(trendData);
-            setData(resultData);
-        }, 1001);
+    async function fetchData () {
+        try {
+            const trendData = await getTrendingAnime();
+            
+            setTimeout(async () => {
+                const resultData = await findAnime(query);
+    
+                setTrend(trendData);
+                setData(resultData);
+            }, 1001);
+        }
+        catch (err) {
+            if (err.response) {
+                setError(err.response.status);
+            }
+        }
     }
 
     useEffect(() => {
         fetchData();
     }, [query]);
 
-    return (
-        <main className="text-white font-noto-sans base-container flex flex-col gap-10 pb-16">
-            <section className="bg-dark-primary rounded-2xl h-[225px] flex flex-col items-center justify-center">
-                <h3 className="text-lg">Search results for</h3>
-                <h1 className="text-4xl">"{query}"</h1>
-            </section>
+    function SearchContent () {
+        return (
             <section className="grid grid-cols-4 gap-4">
                 <div className="col-span-3">
                     {animeData ? <SearchResult animeData={animeData} /> : <Loading>Finding Anime</Loading>}
@@ -43,6 +48,16 @@ function Search () {
                     {trendAnime && <TrendList trendAnime={trendAnime} />}
                 </aside>
             </section>
+        )
+    }
+
+    return (
+        <main className="text-white font-noto-sans base-container flex flex-col gap-10 pb-16">
+            <section className="bg-dark-primary rounded-2xl h-[225px] flex flex-col items-center justify-center">
+                <h3 className="text-lg">Search results for</h3>
+                <h1 className="text-4xl">"{query}"</h1>
+            </section>
+            {!error ? <SearchContent /> : <Loading error={error} />}
         </main>
     );
 }

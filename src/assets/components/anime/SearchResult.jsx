@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import FButton from "../buttons/FButton";
 import { ReactComponent as PlayIcon } from "../../icons/play.svg";
@@ -8,6 +8,8 @@ function SearchResult ({ animeData }) {
     const navigate = useNavigate();
     const results = animeData.data;
     const synopsisLength = 150;
+
+    if (!results) return;
 
     if (results.length < 1) {
         return (
