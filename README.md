@@ -10,7 +10,7 @@ this project uses yarn for the script package so it affects the guide, maybe you
 1. Just clone this repository and then
 
     ```bash
-    cd jaozo
+    git clone https://github.com/norman-andrians/jaozo.git && cd jaozo
     ```
 2. install dependencies
 
