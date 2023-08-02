@@ -4,13 +4,20 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
-import './dist/main.css';
-import { getGenres } from './lib/anime-api'
+import './dist/main.css'; // the css
+import { getGenres } from './lib/anime-api' // that api script
+
+// Static components
 import Navbar from './assets/components/Navbar'
 import Footer from './assets/components/Footer'
+
+// Pages
 import Landing from './assets/pages/landing'
 import Anime from './assets/pages/anime'
 import Search from './assets/pages/search'
+import NotFound404 from './assets/pages/NotFound404';
+
+// Data
 import pages from './assets/data/pages.json';
 
 function App() {
@@ -35,6 +42,7 @@ function App() {
         <Route path='/' element={ <Landing /> } />
         <Route path='/search' element={ <Search /> } />
         <Route path='/anime/:animeId' element={ <Anime /> } />
+        <Route path='*' element={ <NotFound404 /> } />
       </Routes>
       <Footer />
     </Router>
