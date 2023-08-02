@@ -3,6 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { findAnime, getTrendingAnime } from "../../lib/anime-api";
 import SearchResult from "../components/anime/SearchResult";
 import Loading from "../components/anime/Loading";
+import TrendList from "../components/anime/TrendList";
 
 function Search () {
     const location = useLocation();
@@ -12,17 +13,21 @@ function Search () {
     const [animeData, setData] = useState(null);
     const [trendAnime, setTrend] = useState(null);
 
-    useEffect(() => {
-        findAnime(query).then(res => {
-            setData(res);
-        });
-    }, [query]);
+    async function fetchData () {
+        const trendData = await getTrendingAnime();
+        
+        setTimeout(async() => {
+            const resultData = await findAnime(query);
+
+            console.log("Laww");
+            setTrend(trendData);
+            setData(resultData);
+        }, 1001);
+    }
 
     useEffect(() => {
-        getTrendingAnime().then(res => {
-            setTrend(res);
-        });
-    }, []);
+        fetchData();
+    }, [query]);
 
     return (
         <main className="text-white font-noto-sans base-container flex flex-col gap-10">
@@ -36,17 +41,7 @@ function Search () {
                 </div>
                 <aside className="flex flex-col gap-3">
                     <h2 className="text-xl">You might be interested</h2>
-                    <ol className="list-decimal flex flex-col gap-2 text-white text-opacity-60 text-sm">
-                        {trendAnime && trendAnime.data.map((trend, key) => {
-                            return (
-                                <li key={key} className="ps-1 hover:underline">
-                                    <Link to={`/anime/${trend.mal_id}`}>
-                                        {trend.title_english ? trend.title_english : trend.title}
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ol>
+                    {trendAnime && <TrendList trendAnime={trendAnime} />}
                 </aside>
             </section>
         </main>

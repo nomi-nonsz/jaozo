@@ -5,7 +5,7 @@ import {
   Route
 } from 'react-router-dom'
 import './dist/main.css'; // the css
-import { getGenres } from './lib/anime-api' // that api script
+import { findAnime, getGenres } from './lib/anime-api' // that api script
 
 // Static components
 import Navbar from './assets/components/Navbar'
