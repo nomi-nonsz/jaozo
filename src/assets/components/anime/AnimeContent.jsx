@@ -95,14 +95,18 @@ function AnimeContent ({animeData, episodeData}) {
                             before:bg-gradient-to-b
                             before:pointer-events-none
                         `}>
-                            {!expandSynopsis ? 
-                                anime.synopsis.length > synopsisMaxLength ? anime.synopsis.slice(0, synopsisMaxLength) + "..." : anime.synopsis :
-                                anime.synopsis
+                            {anime.synopsis &&
+                                !expandSynopsis ? 
+                                    anime.synopsis.length > synopsisMaxLength ? anime.synopsis.slice(0, synopsisMaxLength) + "..." : anime.synopsis :
+                                    anime.synopsis
+                                
                             }
                         </p>
                     </article>
-                    {anime.synopsis.length > synopsisMaxLength && <button className="text-primary" onClick={() => { toggleSynopsis(!expandSynopsis) }}>
-                        {expandSynopsis ? "Read Less" : "Read More"}
+                    {anime.synopsis &&
+                        anime.synopsis.length > synopsisMaxLength && <button className="text-primary" onClick={() => { toggleSynopsis(!expandSynopsis) }}>
+                            {expandSynopsis ? "Read Less" : "Read More"
+                    }
                     </button>}
                 </div>
                 <div className="flex flex-row items-center gap-4">

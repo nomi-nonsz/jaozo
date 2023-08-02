@@ -19,7 +19,6 @@ function Search () {
         setTimeout(async() => {
             const resultData = await findAnime(query);
 
-            console.log("Laww");
             setTrend(trendData);
             setData(resultData);
         }, 1001);

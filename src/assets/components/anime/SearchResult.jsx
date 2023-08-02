@@ -32,9 +32,11 @@ function SearchResult ({ animeData }) {
                                 </Link>
                                 <div className="text-primary">{result.status}</div>
                             </header>
-                            <article className="">
-                                {result.synopsis.length > synopsisLength ? result.synopsis.slice(0, synopsisLength) + "..." : result.synopsis}
-                            </article>
+                            {result.synopsis && 
+                                <article className="">
+                                    {result.synopsis.length > synopsisLength ? result.synopsis.slice(0, synopsisLength) + "..." : result.synopsis}
+                                </article>
+                            }
                             <p className="text-white text-opacity-50">
                                 {result.type === "Movie" ? "Movie" : `${result.episodes} Episodes`} | {result.rating} | {result.year}
                             </p>
