@@ -40,7 +40,7 @@ function SearchResult ({ animeData }) {
                             <p className="text-white text-opacity-50">
                                 {result.type === "Movie" ? "Movie" : `${result.episodes} Episodes`} | {result.rating} | {result.year}
                             </p>
-                            <div className="flex flex-row gap-3">
+                            <div className="flex flex-row gap-3 mt-3">
                                 <FButton type="single" mode="normal" onClick={() => { navigate(`/anime/${result.mal_id}`) }}><PlayIcon /></FButton>
                                 <FButton type="single" mode="invert"><MarkIcon /></FButton>
                             </div>

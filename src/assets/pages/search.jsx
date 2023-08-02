@@ -29,7 +29,7 @@ function Search () {
     }, [query]);
 
     return (
-        <main className="text-white font-noto-sans base-container flex flex-col gap-10">
+        <main className="text-white font-noto-sans base-container flex flex-col gap-10 pb-16">
             <section className="bg-dark-primary rounded-2xl h-[225px] flex flex-col items-center justify-center">
                 <h3 className="text-lg">Search results for</h3>
                 <h1 className="text-4xl">"{query}"</h1>
