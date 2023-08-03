@@ -9,13 +9,13 @@ function Footer () {
     const linkClass = "text-white text-opacity-50 hover:text-opacity-100 transition duration-200";
 
     return (
-        <footer className="bg-[#010010] h-[288px] text-white">
-            <div className="base-container flex flex-row justify-between items-center h-full">
-                <section className="flex flex-row gap-8 items-center">
+        <footer className="bg-[#010010] py-20 md:py-0 md:h-[288px] text-white">
+            <div className="base-container flex flex-col gap-6 md:gap-0 justify-start md:flex-row md:justify-between md:items-center h-full">
+                <section className="flex flex-col md:flex-row gap-8 md:items-center">
                     <div className="">
                         <Logo width={192} />
                     </div>
-                    <header className="w-[400px]">
+                    <header className="xs:w-[400px]">
                         <h1 className="text-2xl">Jaozo</h1>
                         <p className="text-sm">The anime streaming-like for fun i guess... Anime database from <OLink blank={true} href="https://myanimelist.net/">MyAnimeList</OLink> powered with <OLink blank={true} href="https://jikan.moe/">Jikan API</OLink>.<br /><br /> Want to contribute? see <OLink blank={true} href="https://github.com/norman-andrians/jaozo">See source code</OLink></p>
                     </header>

@@ -12,6 +12,9 @@ export default {
         '3xl': '32px',
         '4xl': '48px'
       },
+      screens: {
+        'xs': '480px'
+      },
       colors: {
         'primary': "#4200FF",
         'dark-primary': "#000014",

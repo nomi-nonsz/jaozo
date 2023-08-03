@@ -42,10 +42,8 @@ h1, h2, h3, h4, h5, h6 {
 .hamburger > .h-item {
     @apply bg-white absolute w-[30px] h-[4px] left-1/2 -translate-x-1/2 top-1/2 duration-200
 }
-
-
 @screen md {
-    .base-container { @apply w-sm }
+    .base-container { @apply w-sm mx-auto }
 }
 @screen lg {
     .base-container { @apply w-md }
@@ -69,6 +67,8 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-.base-container {
-    @apply mx-auto;
+@media (max-width: 767px) {
+    .base-container {
+        @apply mx-14;
+    }
 }
