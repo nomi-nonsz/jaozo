@@ -33,8 +33,8 @@ function AnimeContent ({animeData, episodeData}) {
 
     return (
     <div className='flex flex-col gap-6'>
-        <section className='flex flex-row gap-8'>
-            <div className="relative flex-1 w-[560px] h-[315px]">
+        <section className='flex flex-col md:flex-row gap-8'>
+            <div className="relative md:flex-1 w-full h-[315px] md:w-[560px] md:h-[315px]">
                 <iframe
                     className="rounded-xl absolute z-10 w-full h-full"
                     src={anime.trailer}
@@ -74,7 +74,7 @@ function AnimeContent ({animeData, episodeData}) {
                     }}
                 ></div>
             </div>
-            <div className="text-white flex-1 flex flex-col gap-4">
+            <div className="text-white md:flex-1 flex flex-col gap-4">
                 <header className='font-bold font-montserrat'>
                     <div className="text-3xl">
                         {anime.title}
@@ -145,7 +145,10 @@ function AnimeContent ({animeData, episodeData}) {
                 className={(!expandEpisodes && "hidden-content") + `
                     relative
                     grid
-                    grid-cols-4
+                    grid-cols-1
+                    xs:grid-cols-2
+                    md:grid-cols-3
+                    xl:grid-cols-4
                     gap-4
                     overflow-y-hidden`}
                 style={{ height: expandEpisodes ? "fit-content" : "480px" }}>
