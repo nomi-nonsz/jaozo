@@ -8,6 +8,9 @@ Anime database from [MyAnimeList](https://myanimelist.net/) with special search 
 
 ![Wewew](./src/assets/images/wewew.gif)
 
+Jaozo web has been deployed!
+[https://jaozo.vercel.app/](https://jaozo.vercel.app/)
+
 ### Usage
 this project uses yarn for the script package so it affects the guide, maybe you are familiar with yarn even if you use npm or pnpm
 
@@ -30,6 +33,13 @@ this project uses yarn for the script package so it affects the guide, maybe you
     yarn twatch
     ```
 
+### Build
+if you want to build this project use the following command
+
+```bash
+yarn tbuild && yarn vite build
+```
+
 ### Additional scripts
 
 - ### twatch
@@ -38,6 +48,13 @@ this project uses yarn for the script package so it affects the guide, maybe you
 
     ```
     yarn twatch
+    ```
+- ### tbuild
+    
+    For build CSS, smaller size. it run `tailwindcss -i ./src/input.css -o ./src/App.css --watch`
+
+    ```
+    yarn build
     ```
 
 
