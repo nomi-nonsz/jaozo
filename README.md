@@ -6,6 +6,8 @@ Jaozo is the anime streaming-like for fun. Jaozo is actually not made for watch 
 
 Anime database from [MyAnimeList](https://myanimelist.net/) with special search API from [Jikan API](https://jikan.moe/). Initial purpose of making this website is for a self-taught front-end marathon project. This project was made with React + Vite and TailwindCSS.
 
+<img width="300px" src="./src/assets/images/wewew.gif" alt="Wewew" />
+
 ### Usage
 this project uses yarn for the script package so it affects the guide, maybe you are familiar with yarn even if you use npm or pnpm
 
