@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import img from "../images/not-found.png";
 
 function NotFound404 () {
@@ -12,8 +13,9 @@ function NotFound404 () {
                 <img className="w-72" src={img} alt="404" />
             </figure>
             <article className="w-96">
-                <p>Why does this page appear? it may be because the content has been moved or deleted or even unavailable. or maybe you typed the wrong url?</p>
+                <p>Why does this page appear? maybe because the content hasn't been added yet. or maybe you typed the wrong url?<br /></p>
             </article>
+            <div><Link to={"/"} className="text-primary text-lg hover:text-border-primary transition-colors">Go back to home</Link></div>
         </main>
     )
 }
