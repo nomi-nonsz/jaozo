@@ -39,7 +39,7 @@ export default function SearchBar ({ placeholder, theme }) {
 
     return (
         <form onSubmit={handleSearch}>
-            <div className='flex flex-row h-14 xs:w-96 mx-auto rounded-md bg-dark-primary border border-border-primary border-opacity-30'>
+            <div className='flex flex-row h-14 sm:w-96 mx-auto rounded-md bg-dark-primary border border-border-primary border-opacity-30'>
                 <button
                     type="submit"
                     className={btnTheme + " transition duration-200 w-16 h-full grid items-center rounded-s-md"}

@@ -8,10 +8,6 @@ export default {
         'poppins': ['poppins', 'sans-serif'],
         'noto-sans': ['noto sans', 'sans-serif']
       },
-      fontSize: {
-        '3xl': '32px',
-        '4xl': '48px'
-      },
       screens: {
         'xs': '480px'
       },

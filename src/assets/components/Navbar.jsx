@@ -98,6 +98,9 @@ function Navbar ({ pages }) {
                         <div className="bg-white absolute w-[30px] h-[4px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-45"></div>
                         <div className="bg-white absolute w-[30px] h-[4px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -rotate-45"></div>
                     </button>
+                    <div className="mb-5 sm:flex sm:justify-start">
+                        <SearchBar placeholder="One Piece, Naruto..." theme='darked' />
+                    </div>
                     <ul className="flex flex-col">
                         {pages.map((page, key) => {
                             return (

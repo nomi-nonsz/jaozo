@@ -40,11 +40,11 @@ function Search () {
 
     function SearchContent () {
         return (
-            <section className="grid grid-cols-4 gap-4">
-                <div className="col-span-3">
+            <section className="lg:grid lg:grid-cols-4 lg:gap-4">
+                <div className="lg:col-span-3">
                     {animeData ? <SearchResult animeData={animeData} /> : <Loading>Finding Anime</Loading>}
                 </div>
-                <aside className="flex flex-col gap-3">
+                <aside className="hidden lg:flex lg:flex-col lg:gap-3">
                     <h2 className="text-xl">You might be interested</h2>
                     {trendAnime && <TrendList trendAnime={trendAnime} />}
                 </aside>
@@ -54,9 +54,9 @@ function Search () {
 
     return (
         <main className="text-white font-noto-sans base-container flex flex-col gap-10 pb-16">
-            <section className="bg-dark-primary rounded-2xl h-[225px] flex flex-col items-center justify-center">
-                <h3 className="text-lg">Search results for</h3>
-                <h1 className="text-4xl">"{query}"</h1>
+            <section className="bg-dark-primary rounded-2xl h-[120px] sm:h-[225px] flex flex-col items-center justify-center">
+                <h3 className="font-normal sm:text-lg">Search results for</h3>
+                <h1 className="sm:text-4xl">"{query}"</h1>
             </section>
             {!error ? <SearchContent /> : <Loading error={error} />}
         </main>
