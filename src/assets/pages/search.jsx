@@ -21,7 +21,7 @@ function Search () {
             
             setTimeout(async () => {
                 const resultData = await findAnime(query);
-    
+
                 setTrend(trendData);
                 setData(resultData);
             }, 1001);
@@ -34,6 +34,7 @@ function Search () {
     }
 
     useEffect(() => {
+        setData(null);
         fetchData();
     }, [query]);
 
