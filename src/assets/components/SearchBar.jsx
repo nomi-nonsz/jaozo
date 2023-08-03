@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function SearchBar ({ placeholder, theme }) {
     const navigate = useNavigate();
+    const [query, setQuery] = useState("");
     const [btnTheme, setBtnTheme] = useState("");
     const [inpTheme, setInpTheme] = useState("");
 
@@ -24,10 +25,16 @@ export default function SearchBar ({ placeholder, theme }) {
     }, [theme]);
 
     const handleSearch = (e) => {
-        const query = e.target.query.value;
+        const q = query;
 
         e.preventDefault();
-        navigate(`/search?query=${encodeURIComponent(query)}`)
+        setQuery("");
+        navigate(`/search?query=${encodeURIComponent(q)}`);
+
+    }
+
+    const handleChange = (e) => {
+        setQuery(e.target.value);
     }
 
     return (
@@ -42,6 +49,8 @@ export default function SearchBar ({ placeholder, theme }) {
                 <input
                     type="text"
                     name="query"
+                    onChange={handleChange}
+                    value={query}
                     placeholder={placeholder}
                     className={inpTheme + " h-full w-full bg-transparent text-white font-noto-sans placeholder:text-sm placeholder:text-pit-primary placeholder:text-opacity-50"}
                 />
