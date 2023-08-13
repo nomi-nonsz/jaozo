@@ -68,6 +68,10 @@ export function getAnime (id) {
     return fetchAnime(`https://api.jikan.moe/v4/anime/${id}/full`);
 }
 
+export function getHotAnime () {
+    return fetchAnime(``)
+}
+
 export function getTrendingAnime () {
     return fetchAnime(`https://api.jikan.moe/v4/seasons/now?limit=10`);
 }
