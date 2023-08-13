@@ -73,7 +73,7 @@ export function getHotAnime () {
 }
 
 export function getTrendingAnime () {
-    return fetchAnime(`https://api.jikan.moe/v4/seasons/now?limit=10`);
+    return fetchAnime(`https://api.jikan.moe/v4/seasons/now`);
 }
 
 export function findAnime (query) {

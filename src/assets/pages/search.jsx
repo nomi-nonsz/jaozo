@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { findAnime, getTrendingAnime } from "../../lib/anime-api";
 import SearchResult from "../components/anime/SearchResult";
 import Loading from "../components/anime/Loading";
-import TrendList from "../components/anime/TrendList";
+import TrendList from "../components/anime/lists/TrendList";
 
 function Search () {
     const location = useLocation();

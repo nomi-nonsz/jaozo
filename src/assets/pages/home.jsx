@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import Featured from "../components/anime/Featured";
 import Loading from "../components/anime/Loading";
 import { getTrendingAnime } from "../../lib/anime-api";
+import RowList from "../components/anime/lists/RowList";
 
 function Home () {
-    const [hotAnime, setHostAnime] = useState(null);
+    const [hotSummaryAnime, setHotSAnime] = useState(null);
+    const [hotAnime, sethotAnime] = useState(null);
 
     const fetchAnime = async () => {
         try {
             const hot = await getTrendingAnime();
 
-            setHostAnime(hot);
+            const hotSummary = [...hot.data].slice(0, 10);
+
+            setHotSAnime(hotSummary);
+            sethotAnime(hot.data);
         } catch (error) {
             // console.error(error);
         }
@@ -22,7 +27,14 @@ function Home () {
 
     return (
         <main className="text-white base-container">
-            { !hotAnime ? <Loading>Fetching Data</Loading> : <Featured data={hotAnime} /> }
+            { !hotSummaryAnime && !hotAnime ? <Loading>Fetching Data</Loading> : (
+                <>
+                    <Featured data={hotSummaryAnime} />
+                    <div className="flex flex-col">
+                        <RowList title="Hot now 🔥" data={hotAnime} />
+                    </div>
+                </>
+            )}
         </main>
     )
 }

@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import FButton from '../buttons/FButton';
 import { ReactComponent as PlayIcon } from '../../icons/play.svg';
 import { ReactComponent as MarkIcon } from '../../icons/mark.svg';
-import { ReactComponent as LeftArrow } from "../../icons/arrow-left.svg";
+import LeftArrow from "../buttons/arrow/LeftArrow";
+import RightArrow from "../buttons/arrow/RightArrow";
 
 function Featured ({ data }) {
-    const anime = data.data;
+    const anime = data;
     const navigate = useNavigate();
     const [index, setIndex] = useState(0);
 
@@ -22,9 +23,7 @@ function Featured ({ data }) {
     return (
         <div className="grid grid-cols-10 py-20">
             <div className="col-span-3 relative">
-                <button className="absolute -left-14 top-1/2 -translate-y-1/2 group" onClick={prev}>
-                    <LeftArrow className="fill-white opacity-50 group-hover:opacity-80 transition-opacity" />
-                </button>
+                <LeftArrow onClick={prev} />
                 <Link className="group" to={"/anime/" + anime[index].mal_id} title={anime[index].title}>
                     <figure className="relative">
                         <img className="rounded-xl opacity-0" src={anime[index].images.webp.large_image_url} alt="" />
@@ -32,9 +31,7 @@ function Featured ({ data }) {
                         <img className="rounded-xl absolute top-0 left-0" src={anime[index].images.webp.large_image_url} alt="" />
                     </figure>
                 </Link>
-                <button className="absolute -right-14 top-1/2 rotate-180 -translate-y-1/2 group" onClick={next}>
-                    <LeftArrow className="fill-white opacity-50 group-hover:opacity-80 transition-opacity" />
-                </button>
+                <RightArrow onClick={next} />
             </div>
             <div className="col-span-1"></div>
             <div className="col-span-6 flex items-center">
@@ -59,7 +56,7 @@ function Featured ({ data }) {
                     <div className="flex gap-4">
                         <FButton mode="original" onClick={() => { navigate("/anime/" + anime[index].mal_id); }}>
                             <div><PlayIcon /></div>
-                            <div>Play</div>
+                            <div>Watch</div>
                         </FButton>
                         <FButton mode="invert">
                             <div><MarkIcon /></div>
