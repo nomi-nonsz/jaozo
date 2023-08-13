@@ -28,8 +28,11 @@ export default function SearchBar ({ placeholder, theme }) {
         const q = query;
 
         e.preventDefault();
-        setQuery("");
-        navigate(`/search?query=${encodeURIComponent(q)}`);
+
+        if (query.length > 0) {
+            setQuery("");
+            navigate(`/search?query=${encodeURIComponent(q)}`);
+        }
 
     }
 
