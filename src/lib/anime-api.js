@@ -1,5 +1,8 @@
 import axios from "axios";
 
+const momoko_domain = "";
+const local_domain = "http://localhost:6969";
+
 async function fetchAnime (url) {
     try {
         console.log(`Make request for ${url}`)
@@ -68,6 +71,35 @@ export function getAnime (id) {
     return fetchAnime(`https://api.jikan.moe/v4/anime/${id}/full`);
 }
 
+export async function getMultipleAnime (ids) {
+    // try {
+    //     const animes = [];
+
+    //     for (let id of ids) {
+    //         const anime = await fetchAnime(`https://api.jikan.moe/v4/anime/${id}`);
+    //         animes.push(anime.data);
+    //     }
+        
+    //     return animes;
+    // }
+    // catch (error) {
+    //     return error;
+    // }
+    try {
+        const animes = await axios.get(`${local_domain}/anime`, {
+            params: {
+                mal_id: ids
+            }
+        })
+        console.log(animes.data);
+
+        return animes;
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+
 export function getHotAnime () {
     return fetchAnime(``)
 }
@@ -76,6 +108,10 @@ export function getTrendingAnime () {
     return fetchAnime(`https://api.jikan.moe/v4/seasons/now`);
 }
 
-export function findAnime (query) {
-    return fetchAnime(`https://api.jikan.moe/v4/anime?q="${query}"`).catch(error => error);
+export async function findAnime (query) {
+    try {
+        return await fetchAnime(`https://api.jikan.moe/v4/anime?q="${query}"`);
+    } catch (error) {
+        return error;
+    }
 }
