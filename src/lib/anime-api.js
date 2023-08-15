@@ -99,8 +99,8 @@ export async function getMultipleAnime (ids) {
     }
 }
 
-export function getHotAnime () {
-    return fetchAnime(``)
+export function getTopAnime () {
+    return fetchAnime(`https://api.jikan.moe/v4/top/anime`);
 }
 
 export function getTrendingAnime () {
