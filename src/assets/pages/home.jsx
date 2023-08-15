@@ -27,7 +27,7 @@ function Home () {
         try {
             const hot = await getTrendingAnime();
             const top = await getTopAnime();
-            // await new Promise(resolve => setTimeout(resolve, 800));
+            await new Promise(resolve => setTimeout(resolve, 800));
             const eps = await getLatestEpisode();
             const genres = await getGenres();
 
@@ -38,7 +38,7 @@ function Home () {
             const eps_unlocked = epsSummary.filter(ep => ep.region_locked == false);
             const eps_filtered = [...eps_unlocked, ...eps_locked];
 
-            const genreSummary = genres.slice(0, 5);
+            const genreSummary = genres.slice(0, 10);
 
             sethotAnime(hot);
             setHotSAnime(hotSummary);
@@ -70,18 +70,22 @@ function Home () {
             (!hotSummaryAnime && !hotAnime ? <Loading>Fetching Data</Loading> : (
                 <>
                     <Featured data={hotSummaryAnime} />
-                    <div className="flex flex-col gap-5 py-5">
-                        <RowList title="Hot now 🔥" data={hotAnime.data} />
+                    <div className="flex flex-col gap-10 py-5">
+                        <RowList title="Hot now 🔥" model="anime" data={hotAnime.data} />
                         { topAnime ?
-                            <RowList title="Top Anime 🏅️" data={topAnime.data} /> :
+                            <RowList title="Top Anime 🏅️" model="anime" data={topAnime.data} /> :
                             <Loading>Get anime data</Loading>
                         }
                         { epsAnime ?
-                            <RowList title="Latest Updated Episode 🗣️" data={epsAnime} /> :
+                            <RowList title="Latest Updated Episode 🗣️" model="anime" data={epsAnime} /> :
+                            <Loading>Get anime data</Loading>
+                        }
+                        { genresAnime ?
+                            <RowList title="By Genres" model="categories" data={genresAnime} /> :
                             <Loading>Get anime data</Loading>
                         }
                         { recommendAnime ?
-                            <RowList title="Recommendation 👍" data={recommendAnime.data} /> :
+                            <RowList title="Recommendation 👍" model="anime" data={recommendAnime.data} /> :
                             <Loading>Get anime data (this takes a few minutes cuz rate limited)</Loading>
                         }
                     </div>

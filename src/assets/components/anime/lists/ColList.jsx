@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function ColList ({ anime }) {
+
+function Anime ({ anime }) {
     return (
         <div className="flex-1">
             <Link to={"/anime/" + (anime.mal_id || anime.entry.mal_id)} className="flex flex-col gap-1">
@@ -24,7 +25,23 @@ function ColList ({ anime }) {
                 </div>
             </Link>
         </div>
-    );
+    )
 }
+
+function Categories ({ data }) {
+    return (
+        <div className="col-span-2">
+            <Link to={data.url} className="bg-dark-primary hover:bg-pit-primary hover:text-dark-primary rounded border border-border-primary border-opacity-30 hover:border-opacity-0 h-16 flex justify-center items-center transition duration-200">
+                {data.name}
+            </Link>
+        </div>
+    )
+}
+
+function ColList () {
+}
+
+ColList.Anime = Anime;
+ColList.Categories = Categories;
 
 export default ColList;
