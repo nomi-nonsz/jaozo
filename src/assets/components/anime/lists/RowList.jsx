@@ -22,7 +22,7 @@ function RowList ({ title, data }) {
             <h1 className="text-2xl font-montserrat">{title}</h1>
             <div className="overflow-x-hidden">
                 <div className="w-[500%]">
-                    <div className="flex transition-transform duration-300" style={{ transform: "translateX(-" + ((5 * point) / data.length) * 100 + "%)" }}>
+                    <div className="flex gap-4 transition-transform duration-300" style={{ transform: "translateX(-" + ((5 * point) / data.length) * 100 + "%)" }}>
                         {data.map((anime, key) => {
                             return <ColList anime={anime} key={key} />
                         })}

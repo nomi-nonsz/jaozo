@@ -91,7 +91,6 @@ export async function getMultipleAnime (ids) {
                 mal_id: ids
             }
         })
-        console.log(animes.data);
 
         return animes;
     }

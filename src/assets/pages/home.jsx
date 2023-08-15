@@ -13,12 +13,15 @@ function Home () {
     let isRequest = false;
 
     const fetchAnime = () => {
-        getTrendingAnime().then(hot => {
-            const hotSummary = [...hot.data].slice(0, 10);
-            setHotSAnime(hotSummary);
-        });
+        setTimeout(() => {
+            getTrendingAnime().then(hot => {
+                const hotSummary = [...hot.data].slice(0, 10);
+                sethotAnime(hot);
+                setHotSAnime(hotSummary);
+            });
             
-        getMultipleAnime(recomData.mal_ids).then(recommended => setRecommend(recommended));
+            getMultipleAnime(recomData.mal_ids).then(recommended => { setRecommend(recommended); });
+        }, 800);
     }
 
     useEffect(() => {
@@ -34,8 +37,11 @@ function Home () {
                 <>
                     <Featured data={hotSummaryAnime} />
                     <div className="flex flex-col">
-                        { recommendAnime && <RowList title="Recommendation 👍" data={recommendAnime} /> }
-                        <RowList title="Hot now 🔥" data={hotAnime} />
+                        <RowList title="Hot now 🔥" data={hotAnime.data} />
+                        { recommendAnime ?
+                            <RowList title="Recommendation 👍" data={recommendAnime.data} /> :
+                            <Loading>Get anime data (this takes a few minutes)</Loading>
+                        }
                     </div>
                 </>
             )}
