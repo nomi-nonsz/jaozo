@@ -17,14 +17,21 @@ function Loading ({ error, children }) {
     }, []);
 
     function HandlingError () {
-        if (error == 429) {
+        const errorMsg = {
+            429: {
+                error: "Too Many Request!",
+                message: <>This message appears when sending requests to the server repeatedly with a short period of time. if this message keeps appearing, <OLink href="https://github.com/norman-andrians/jaozo/issues" blank={true}>report bug</OLink></>
+            }
+        };
+
+        if (error >= 400 && error < 500) {
             return (<>
                 <figure>
                     <img className="w-40 mx-auto" src={DedImg} alt="my oc loading.." />
                 </figure>
                 <header className="font-montserrat md:w-[640px] mx-auto">
-                    <h1 className="text-2xl">Error 429: Too Many Request!</h1>
-                    <p>This message appears when sending requests to the server repeatedly with a short period of time. if this message keeps appearing, <OLink href="https://github.com/norman-andrians/jaozo/issues" blank={true}>report bug</OLink></p>
+                    <h1 className="text-2xl">Error {error}: {errorMsg[error].error && errorMsg[error].error}</h1>
+                    <p>{errorMsg[error].message && errorMsg[error].message}</p>
                 </header>
             </>)
         }

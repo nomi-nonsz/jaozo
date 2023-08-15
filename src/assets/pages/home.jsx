@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Featured from "../components/anime/Featured";
 import Loading from "../components/anime/Loading";
-import { getLatestEpisode, getMultipleAnime, getTopAnime, getTrendingAnime } from "../../lib/anime-api";
+import {
+    getGenres,
+    getLatestEpisode,
+    getMultipleAnime,
+    getTopAnime,
+    getTrendingAnime
+} from "../../lib/anime-api";
 import recomData from "../data/custom-anime/recomended.json";
 import RowList from "../components/anime/lists/RowList";
 
 function Home () {
+    const [statusError, setError] = useState(null);
+
     const [recommendAnime, setRecommend] = useState(null);
     const [hotSummaryAnime, setHotSAnime] = useState(null);
     const [hotAnime, sethotAnime] = useState(null);
     const [topAnime, setTop] = useState(null);
     const [epsAnime, setEps] = useState(null);
+    const [genresAnime, setGenres] = useState(null);
 
     let isRequest = false;
 
@@ -18,8 +27,9 @@ function Home () {
         try {
             const hot = await getTrendingAnime();
             const top = await getTopAnime();
-            await new Promise(resolve => setTimeout(resolve, 600));
+            // await new Promise(resolve => setTimeout(resolve, 800));
             const eps = await getLatestEpisode();
+            const genres = await getGenres();
 
             const hotSummary = [...hot.data].slice(0, 10);
 
@@ -28,13 +38,18 @@ function Home () {
             const eps_unlocked = epsSummary.filter(ep => ep.region_locked == false);
             const eps_filtered = [...eps_unlocked, ...eps_locked];
 
+            const genreSummary = genres.slice(0, 5);
+
             sethotAnime(hot);
             setHotSAnime(hotSummary);
             setTop(top);
             setEps(eps_filtered);
+            setGenres(genreSummary);
         }
         catch (error) {
-            console.error(error);
+            if (error.response) {
+                setError(error.response.status);
+            }
         }
     }
 
@@ -51,7 +66,8 @@ function Home () {
 
     return (
         <main className="text-white base-container">
-            { !hotSummaryAnime && !hotAnime ? <Loading>Fetching Data</Loading> : (
+            { statusError ? <Loading error={statusError} /> :
+            (!hotSummaryAnime && !hotAnime ? <Loading>Fetching Data</Loading> : (
                 <>
                     <Featured data={hotSummaryAnime} />
                     <div className="flex flex-col gap-5 py-5">
@@ -70,7 +86,7 @@ function Home () {
                         }
                     </div>
                 </>
-            )}
+            ))}
         </main>
     )
 }

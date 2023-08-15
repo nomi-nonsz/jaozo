@@ -28,7 +28,6 @@ async function fetchAnime (url) {
             const message = error.message;
 
             if (status == 429) {
-                console.error(`GET::${url}. Error Status: ${status}`);
                 console.error(`<${status}> Too Many Request! You can't make another request in such a short time. \n\n${message}`);
             }
         }
@@ -84,22 +83,37 @@ export async function getMultipleAnime (ids) {
     }
 }
 
-export function getTopAnime () {
-    return fetchAnime(`https://api.jikan.moe/v4/top/anime`);
+export async function getTopAnime () {
+    try {
+        const data = await fetchAnime(`https://api.jikan.moe/v4/top/anime`);
+        return data;
+    } catch (error) {
+        throw error;
+    }
 }
 
-export function getTrendingAnime () {
-    return fetchAnime(`https://api.jikan.moe/v4/seasons/now`);
+export async function getTrendingAnime () {
+    try {
+        const data = await fetchAnime(`https://api.jikan.moe/v4/seasons/now`);
+        return data;
+    } catch (error) {
+        throw error;
+    }
 }
 
-export function getLatestEpisode () {
-    return fetchAnime(`https://api.jikan.moe/v4/watch/episodes`);
+export async function getLatestEpisode () {
+    try {
+        const data = await fetchAnime(`https://api.jikan.moe/v4/watch/episodes`);
+        return data;
+    } catch (error) {
+        throw error;
+    }
 }
 
 export async function findAnime (query) {
     try {
         return await fetchAnime(`https://api.jikan.moe/v4/anime?q="${query}"`);
     } catch (error) {
-        return error;
+        throw error;
     }
 }
