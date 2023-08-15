@@ -42,25 +42,23 @@ async function fetchAnime (url) {
 
 // tryna get genres
 // nyoba ngambil genre
-export function getGenres () {
-    return fetchAnime(`https://api.jikan.moe/v4/genres/anime`)
-        .then((res) => {
-            const populary = res.data.filter(val => val.count > 1500);
-            const genres = [];
+export async function getGenres () {
+    try {
+        const res = await fetchAnime(`https://api.jikan.moe/v4/genres/anime`);
+        const populary = res.data.filter(val => val.count > 1500);
+        const genres = [];
 
-            populary.forEach(v => {
-                const genre_name = v.name;
-                const genre_url = `/genre/${genre_name.toLowerCase()}`.replace(/\s+/g, "-");
+        populary.forEach(v => {
+            const genre_name = v.name;
+            const genre_url = `/genre/${genre_name.toLowerCase()}`.replace(/\s+/g, "-");
 
-                genres.push({ name: genre_name, url: genre_url });
-            });
-
-            return genres;
-        })
-        .catch((error) => {
-            console.error("Can't get genre data");
-            return false;
-        })
+            genres.push({ name: genre_name, url: genre_url });
+        });
+        return genres;
+    } catch (error) {
+        console.error("Can't get genre data");
+        return false;
+    }
 }
 
 export function getEpisodeById (id) {
@@ -72,19 +70,6 @@ export function getAnime (id) {
 }
 
 export async function getMultipleAnime (ids) {
-    // try {
-    //     const animes = [];
-
-    //     for (let id of ids) {
-    //         const anime = await fetchAnime(`https://api.jikan.moe/v4/anime/${id}`);
-    //         animes.push(anime.data);
-    //     }
-        
-    //     return animes;
-    // }
-    // catch (error) {
-    //     return error;
-    // }
     try {
         const animes = await axios.get(`${local_domain}/anime`, {
             params: {
