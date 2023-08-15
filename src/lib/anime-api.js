@@ -107,6 +107,10 @@ export function getTrendingAnime () {
     return fetchAnime(`https://api.jikan.moe/v4/seasons/now`);
 }
 
+export function getLatestEpisode () {
+    return fetchAnime(`https://api.jikan.moe/v4/watch/episodes`);
+}
+
 export async function findAnime (query) {
     try {
         return await fetchAnime(`https://api.jikan.moe/v4/anime?q="${query}"`);
