@@ -24,17 +24,22 @@ import pages from './assets/data/pages.json';
 
 function App() {
   const [rpages, setPages] = useState([]);
+  let isRequest = false;
 
   // inget ini belum direkomendasikan
   // variabel useState pages, pages, request useEffect ini sudah seharusnya ditempatkan lagi di komponen Navbar
   // masing-masing list navigasi teriterasi yang di Navbar harus di ubah menjadi komponen yang kemudia di iterasikan
   // jadi saat di komponen Navbar melakukan request, data akan update lagi jika data di lemparkan ke komponen genre
   useEffect(() => {
+    if (!isRequest) {
       getGenres().then((data) => {
           pages[1].child = data;
         }).finally(() => {
           setPages(pages);
       })
+    }
+
+    return () => { isRequest = true }
   }, []);
 
   return (

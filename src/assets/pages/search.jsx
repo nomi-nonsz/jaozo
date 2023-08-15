@@ -6,28 +6,29 @@ import Loading from "../components/anime/Loading";
 import TrendList from "../components/anime/lists/TrendList";
 
 function Search () {
+    let isRequest = false;
+
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get("query");
 
     const [animeData, setData] = useState(null);
     const [trendAnime, setTrend] = useState(null);
-
     const [error, setError] = useState(null);
 
     async function fetchData () {
+        setData(null);
+        
         try {
             const trendData = await getTrendingAnime();
+            await new Promise(resolve => setTimeout(resolve, 800));
+            const resultData = await findAnime(query);
 
-            setData(null);
-            
-            setTimeout(async () => {
-                const resultData = await findAnime(query);
+            const trendSummary = trendData.data.slice(0, 10);
 
-                setTrend(trendData);
-                setData(resultData);
-                setError(null);
-            }, 1001);
+            setTrend(trendSummary);
+            setData(resultData);
+            setError(null);
         }
         catch (err) {
             if (err.response) {
@@ -37,7 +38,9 @@ function Search () {
     }
 
     useEffect(() => {
-        fetchData();
+        if (!isRequest) fetchData();
+
+        return () => { isRequest = true; }
     }, [query]);
 
     function SearchContent () {
