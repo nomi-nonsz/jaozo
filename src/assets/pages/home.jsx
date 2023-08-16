@@ -42,10 +42,10 @@ function Home () {
             // i got rate limited fr 💀️💀️💀️
             const hot = await getTrendingAnime();
             const top = await getTopAnime();
-            await new Promise(resolve => setTimeout(resolve, 800));
+            await new Promise(resolve => setTimeout(resolve, 1000));
             const eps = await getLatestEpisode();
             const genres = await getGenres();
-            await new Promise(resolve => setTimeout(resolve, 800));
+            await new Promise(resolve => setTimeout(resolve, 1000));
             const airing = await getTopAiring();
             
             const hotSummary = [...hot.data].slice(0, 10);
