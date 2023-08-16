@@ -3,10 +3,10 @@ import axios from "axios";
 const momoko_domain = "";
 const local_domain = "http://localhost:6969";
 
-async function fetchAnime (url) {
+async function fetchAnime (url, config) {
     try {
         console.log(`Make request for ${url}`)
-        const response = await axios.get(url);
+        const response = await axios.get(url, config);
         console.log(`Get data from response`);
         const data = await response.data;
         
@@ -75,11 +75,10 @@ export async function getMultipleAnime (ids) {
                 mal_id: ids
             }
         })
-
         return animes;
     }
     catch (error) {
-        console.error(error);
+        throw error;
     }
 }
 
@@ -87,6 +86,18 @@ export async function getTopAnime () {
     try {
         const data = await fetchAnime(`https://api.jikan.moe/v4/top/anime`);
         return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function getTopAiring () {
+    try {
+        return await fetchAnime("https://api.jikan.moe/v4/top/anime", {
+            params: {
+                filter: "airing"
+            }
+        });
     } catch (error) {
         throw error;
     }

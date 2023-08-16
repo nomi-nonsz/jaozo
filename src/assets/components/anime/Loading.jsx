@@ -18,13 +18,17 @@ function Loading ({ error, children }) {
 
     function HandlingError () {
         const errorMsg = {
+            0: {
+                error: "Error Network",
+                message: "Unable to connect to the network"
+            },
             429: {
                 error: "Too Many Request!",
-                message: <>This message appears when sending requests to the server repeatedly with a short period of time. if this message keeps appearing, <OLink href="https://github.com/norman-andrians/jaozo/issues" blank={true}>report bug</OLink></>
+                message: <>This message appears when sending requests to the server repeatedly with a short period of time, usually occurs due to a rate limit from the server. if this message keeps appearing, <OLink href="https://github.com/norman-andrians/jaozo/issues" blank={true}>report bug</OLink></>
             }
         };
 
-        if (error >= 400 && error < 500) {
+        if (error >= 400 || error === 0) {
             return (<>
                 <figure>
                     <img className="w-40 mx-auto" src={DedImg} alt="my oc loading.." />
