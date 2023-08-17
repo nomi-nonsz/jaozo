@@ -8,8 +8,7 @@ Anime database from [MyAnimeList](https://myanimelist.net/) with special search 
 
 ![Wewew](./src/assets/images/wewew.gif)
 
-Jaozo web has been deployed!
-[https://jaozo.vercel.app/](https://jaozo.vercel.app/)
+The deployment has been stopped until commit 7493a7585f5424b1b9feb8ccf394672994f9dfe3 on the main branch.
 
 ### Usage
 this project uses yarn for the script package so it affects the guide, maybe you are familiar with yarn even if you use npm or pnpm
