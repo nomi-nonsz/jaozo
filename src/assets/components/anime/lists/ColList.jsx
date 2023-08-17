@@ -4,10 +4,14 @@ import { Link } from "react-router-dom";
 
 function Anime ({ anime }) {
     return (
-        <div className="flex-1">
+        <div className="flex-1 group">
             <Link to={"/anime/" + (anime.mal_id || anime.entry.mal_id)} className="flex flex-col gap-1">
                 <figure className="w-full">
-                    <img className="w-full rounded-md hover:opacity-70 duration-200" src={anime.images ? anime.images.webp.image_url : anime.entry.images.webp.image_url} alt="" />
+                    <img
+                        className="w-full rounded-md group-hover:opacity-70 duration-200"
+                        srcSet={anime.images ? anime.images.webp.image_url : anime.entry.images.webp.image_url}
+                        alt=""
+                    />
                 </figure>
                 <div className="w-[80%] pt-3">
                     {anime.title_english ? anime.title_english : (anime.title ? anime.title : anime.entry.title)}
