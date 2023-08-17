@@ -104,43 +104,41 @@ function Home () {
         return () => { isRequest = true };
     }, []);
 
-    return (
-        <main className="text-white base-container">
-            { statusError ? <Loading error={statusError} /> :
-            (!hotSummaryAnime && !hotAnime ? <Loading>Fetching Data</Loading> : (
-                <>
-                    <Featured data={hotSummaryAnime} />
-                    <div className="flex flex-col gap-10 py-5">
-                        <RowList title="Hot now 🔥" model="anime" data={hotAnime.data} />
-                        { airingAnime ?
-                            <RowList title="Airing now ✨️" model="anime" data={airingAnime.data} /> :
-                            <Loading>Get anime data</Loading>
-                        }
-                        { epsAnime ?
-                            <RowList title="Latest Updated Episode 🗣️" model="anime" data={epsAnime} /> :
-                            <Loading>Get anime data</Loading>
-                        }
-                        { genresAnime ?
-                            <RowList title="By Genres 🤸‍♀️️" model="categories" data={genresAnime} /> :
-                            <Loading>Get anime data</Loading>
-                        }
-                        { popularAnime ?
-                            <RowList title="Most Popular 🙌" model="anime" data={popularAnime.data} /> :
-                            <Loading>Get anime data</Loading>
-                        }
-                        { topAnime ?
-                            <RowList title="Top Anime 🏅️" model="anime" data={topAnime.data} /> :
-                            <Loading>Get anime data</Loading>
-                        }
-                        { upcomingAnime ?
-                            <RowList title="Coming Soon ⏰" model="anime" data={upcomingAnime.data} /> :
-                            <Loading>Get anime data</Loading>
-                        }
-                    </div>
-                </>
-            ))}
-        </main>
-    )
+    return statusError ? <Loading error={statusError} /> :
+        (!hotSummaryAnime && !hotAnime ? <Loading>Fetching Data</Loading> : (
+        <>
+            <Featured data={hotSummaryAnime} />
+            <main className="text-white base-container">
+                <div className="flex flex-col gap-10 py-5">
+                    <RowList title="Hot now 🔥" model="anime" data={hotAnime.data} />
+                    { airingAnime ?
+                        <RowList title="Airing now ✨️" model="anime" data={airingAnime.data} /> :
+                        <Loading>Get anime data</Loading>
+                    }
+                    { epsAnime ?
+                        <RowList title="Latest Updated Episode 🗣️" model="anime" data={epsAnime} /> :
+                        <Loading>Get anime data</Loading>
+                    }
+                    { genresAnime ?
+                        <RowList title="By Genres 🤸‍♀️️" model="categories" data={genresAnime} /> :
+                        <Loading>Get anime data</Loading>
+                    }
+                    { popularAnime ?
+                        <RowList title="Most Popular 🙌" model="anime" data={popularAnime.data} /> :
+                        <Loading>Get anime data</Loading>
+                    }
+                    { topAnime ?
+                        <RowList title="Top Anime 🏅️" model="anime" data={topAnime.data} /> :
+                        <Loading>Get anime data</Loading>
+                    }
+                    { upcomingAnime ?
+                        <RowList title="Coming Soon ⏰" model="anime" data={upcomingAnime.data} /> :
+                        <Loading>Get anime data</Loading>
+                    }
+                </div>
+            </main>
+        </>
+    ))
 }
 
 export default Home;
