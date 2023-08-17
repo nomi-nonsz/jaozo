@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// backend url
 const momoko_domain = "";
 const local_domain = "http://localhost:6969";
 
@@ -40,7 +41,7 @@ async function fetchAnime (url, config) {
 }
 
 // tryna get genres
-// nyoba ngambil genre
+// nyoba ngambil genre, tapi dikembalikan dalam bentuk objek
 export async function getGenres () {
     try {
         const res = await fetchAnime(`https://api.jikan.moe/v4/genres/anime`);

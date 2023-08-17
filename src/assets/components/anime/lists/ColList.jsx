@@ -31,14 +31,15 @@ function Anime ({ anime }) {
 function Categories ({ data }) {
     return (
         <div className="col-span-2">
-            <Link to={data.url} className="bg-dark-primary hover:bg-pit-primary hover:text-dark-primary rounded border border-border-primary border-opacity-30 hover:border-opacity-0 h-16 flex justify-center items-center transition duration-200">
+            <Link to={data.url} className="bg-dark-primary hover:bg-primary rounded border border-border-primary border-opacity-20 hover:border-opacity-0 h-16 flex justify-center items-center transition duration-200">
                 {data.name}
             </Link>
         </div>
     )
 }
 
-function ColList () {
+function ColList ({ children }) {
+    return <div className="col-span-2">{children}</div>
 }
 
 ColList.Anime = Anime;

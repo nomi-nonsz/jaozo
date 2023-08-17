@@ -84,7 +84,7 @@ function Home () {
         if (isRequest) {
             setTimeout(() => {     
                 fetchAnime();
-                fetchMultiple();
+                // fetchMultiple();
             }, 800);
         }
         
@@ -115,10 +115,10 @@ function Home () {
                             <RowList title="Top Anime 🏅️" model="anime" data={topAnime.data} /> :
                             <Loading>Get anime data</Loading>
                         }
-                        { recommendAnime ?
+                        {/* { recommendAnime ?
                             <RowList title="Recommendation 👍" model="anime" data={recommendAnime.data} /> :
                             <Loading>Get anime data (this takes a few minutes cuz rate limited)</Loading>
-                        }
+                        } */}
                     </div>
                 </>
             ))}
