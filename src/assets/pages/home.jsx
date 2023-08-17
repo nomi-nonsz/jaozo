@@ -6,8 +6,7 @@ import {
     getLatestEpisode,
     getMultipleAnime,
     getTopAnime,
-    getTrendingAnime,
-    getTopAiring
+    getTrendingAnime
 } from "../../lib/anime-api";
 import { FeaturedContext } from "../context/featuredContext";
 import recomData from "../data/custom-anime/recomended.json";
@@ -24,7 +23,9 @@ function Home () {
         top: topAnime,
         eps: epsAnime,
         genre: genresAnime,
-        airing: airingAnime
+        airing: airingAnime,
+        upcoming: upcomingAnime,
+        popular: popularAnime
     } = content;
 
     let isRequest = false;
@@ -49,7 +50,10 @@ function Home () {
             const eps = await getLatestEpisode();
             const genres = await getGenres();
             await new Promise(resolve => setTimeout(resolve, 1000));
-            const airing = await getTopAiring();
+            const airing = await getTopAnime("airing");
+            const upcoming = await getTopAnime("upcoming");
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const popular = await getTopAnime("bypopularity");
             
             const hotSummary = [...hot.data].slice(0, 10);
             
@@ -66,7 +70,9 @@ function Home () {
                 top: top,
                 eps: eps_filtered,
                 genre: genreSummary,
-                airing: airing
+                airing: airing,
+                upcoming: upcoming,
+                popular: popular
             });
         }
         catch (error) {
@@ -118,8 +124,16 @@ function Home () {
                             <RowList title="By Genres 🤸‍♀️️" model="categories" data={genresAnime} /> :
                             <Loading>Get anime data</Loading>
                         }
+                        { popularAnime ?
+                            <RowList title="Most Popular 🙌" model="anime" data={popularAnime.data} /> :
+                            <Loading>Get anime data</Loading>
+                        }
                         { topAnime ?
                             <RowList title="Top Anime 🏅️" model="anime" data={topAnime.data} /> :
+                            <Loading>Get anime data</Loading>
+                        }
+                        { upcomingAnime ?
+                            <RowList title="Coming Soon ⏰" model="anime" data={upcomingAnime.data} /> :
                             <Loading>Get anime data</Loading>
                         }
                     </div>

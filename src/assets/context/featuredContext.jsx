@@ -7,7 +7,9 @@ export const FeaturedContext = createContext({
         top: null,
         eps: null,
         genre: null,
-        airing: null
+        airing: null,
+        upcoming: null,
+        popular: null
     },
     setContent: function () {}
 });

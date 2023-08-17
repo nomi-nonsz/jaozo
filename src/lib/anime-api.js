@@ -4,6 +4,19 @@ import axios from "axios";
 const momoko_domain = "";
 const local_domain = "http://localhost:6969";
 
+/* ------------------------- */
+// 
+// _   __________   __
+// | | / /| ___ \ \ / /
+// | |/ / | |_/ /\ V / 
+// |    \ |    /  \ /  
+// | |\  \| |\ \  | |  
+// \_| \_/\_| \_| \_/  
+// 
+// Keep Repeat Yourself💀💀💀
+// 
+/* ------------------------- */
+
 async function fetchAnime (url, config) {
     try {
         console.log(`Make request for ${url}`)
@@ -83,22 +96,14 @@ export async function getMultipleAnime (ids) {
     }
 }
 
-export async function getTopAnime () {
+export async function getTopAnime (filter) {
     try {
-        const data = await fetchAnime(`https://api.jikan.moe/v4/top/anime`);
-        return data;
-    } catch (error) {
-        throw error;
-    }
-}
-
-export async function getTopAiring () {
-    try {
-        return await fetchAnime("https://api.jikan.moe/v4/top/anime", {
+        const data = await fetchAnime(`https://api.jikan.moe/v4/top/anime`, {
             params: {
-                filter: "airing"
+                filter: filter
             }
         });
+        return data;
     } catch (error) {
         throw error;
     }

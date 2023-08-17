@@ -36,7 +36,9 @@ function App() {
       top: null,
       eps: null,
       genre: null,
-      airing: null
+      airing: null,
+      upcoming: null,
+      popular: null
     }
   });
 
