@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Featured from "../components/anime/Featured";
 import Loading from "../components/anime/Loading";
 import {
@@ -9,6 +9,7 @@ import {
     getTrendingAnime,
     getTopAiring
 } from "../../lib/anime-api";
+import { FeaturedContext } from "../context/featuredContext";
 import recomData from "../data/custom-anime/recomended.json";
 import RowList from "../components/anime/lists/RowList";
 
@@ -16,13 +17,15 @@ function Home () {
     const [statusError, setError] = useState(null);
 
     // Bro is too many 😭️😭️😭️😭️
-    const [recommendAnime, setRecommend] = useState(null);
-    const [hotSummaryAnime, setHotSAnime] = useState(null);
-    const [hotAnime, sethotAnime] = useState(null);
-    const [topAnime, setTop] = useState(null);
-    const [epsAnime, setEps] = useState(null);
-    const [genresAnime, setGenres] = useState(null);
-    const [airingAnime, setAiring] = useState(null);
+    const { content, setContent } = useContext(FeaturedContext);
+    const {
+        hot: hotAnime,
+        hotSummary: hotSummaryAnime,
+        top: topAnime,
+        eps: epsAnime,
+        genre: genresAnime,
+        airing: airingAnime
+    } = content;
 
     let isRequest = false;
 
@@ -56,13 +59,15 @@ function Home () {
             const eps_filtered = [...eps_unlocked, ...eps_locked];
             
             const genreSummary = genres.slice(0, 10);
-            
-            sethotAnime(hot);
-            setHotSAnime(hotSummary);
-            setTop(top);
-            setEps(eps_filtered);
-            setGenres(genreSummary);
-            setAiring(airing);
+
+            setContent({
+                hot: hot,
+                hotSummary: hotSummary,
+                top: top,
+                eps: eps_filtered,
+                genre: genreSummary,
+                airing: airing
+            });
         }
         catch (error) {
             catchError(error);
@@ -81,8 +86,10 @@ function Home () {
     }
     
     useEffect(() => {
-        if (isRequest) {
-            setTimeout(() => {     
+        const isDataExist = hotAnime && hotSummaryAnime && topAnime && epsAnime && genresAnime && airingAnime;
+
+        if (isRequest && !isDataExist) {
+            setTimeout(() => {
                 fetchAnime();
                 // fetchMultiple();
             }, 800);
@@ -115,10 +122,6 @@ function Home () {
                             <RowList title="Top Anime 🏅️" model="anime" data={topAnime.data} /> :
                             <Loading>Get anime data</Loading>
                         }
-                        {/* { recommendAnime ?
-                            <RowList title="Recommendation 👍" model="anime" data={recommendAnime.data} /> :
-                            <Loading>Get anime data (this takes a few minutes cuz rate limited)</Loading>
-                        } */}
                     </div>
                 </>
             ))}
