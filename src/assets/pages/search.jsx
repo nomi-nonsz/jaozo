@@ -58,10 +58,10 @@ function Search () {
     }
 
     return (
-        <main className="text-white font-noto-sans base-container flex flex-col gap-10 pb-16">
+        <main className="text-white font-noto-sans base-container flex flex-col gap-4 sm:gap-10 pb-8 sm:pb-16">
             <section className="bg-dark-primary rounded-2xl h-[120px] sm:h-[225px] flex flex-col items-center justify-center">
-                <h3 className="font-normal sm:text-lg">Search results for</h3>
-                <h1 className="sm:text-4xl">"{query}"</h1>
+                <div className="font-normal text-sm sm:text-lg">Search results for</div>
+                <h1 className="text-lg sm:text-4xl">"{query}"</h1>
             </section>
             {!error ? <SearchContent /> : <Loading error={error} />}
         </main>

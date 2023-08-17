@@ -24,7 +24,11 @@ export default {
         'lg': '1080px',
         'md': '768px',
         'sm': '640px',
-        'xm': '480px'
+        'xm': '480px',
+        'hxm': '420px'
+      },
+      fontSize: {
+        '2xs': '10px'
       },
       animation: {
         'img-loading': 'towew .3s infinite',

@@ -18,7 +18,7 @@ function SearchResult ({ animeData }) {
     }
 
     const synopsis = (res) => {
-        if (window.innerWidth <= 640) {
+        if (window.innerWidth <= 480) {
             return (
                 res.synopsis.length > synopsisLength ? res.synopsis.slice(0, synopsisLength - 100) + "..." : res.synopsis
             )
@@ -32,7 +32,7 @@ function SearchResult ({ animeData }) {
     }
 
     return (
-        <ul className="flex flex-col gap-8">
+        <ul className="flex flex-col gap-4 sm:gap-8">
             {results.map((result, key) => {
                 return (
                     <li className="flex flex-row gap-4 sm:gap-7 w-11/12" key={key}>
@@ -44,19 +44,19 @@ function SearchResult ({ animeData }) {
                         <div className="flex flex-col gap-1 sm:gap-2">
                             <header className="sm:font-bold font-montserrat">
                                 <Link to={`/anime/${result.mal_id}`}>
-                                    <h1 className="font-bold text-xl sm:text-3xl">{result.title_english ? result.title_english : result.title}</h1>
+                                    <h1 className="font-bold xs:text-xl sm:text-3xl">{result.title_english ? result.title_english : result.title}</h1>
                                 </Link>
-                                <div className="text-primary">{result.status}</div>
+                                <div className="text-primary text-sm sm:text-base">{result.status}</div>
                             </header>
                             {result.synopsis && 
-                                <article className="text-sm sm:text-base">
+                                <article className="text-xs sm:text-base">
                                     {
                                         synopsis(result)
                                     }
                                 </article>
                             }
-                            <p className="text-white text-opacity-50 text-xs sm:text-base">
-                                {result.type === "Movie" ? "Movie" : `${result.episodes} Episodes`} | {result.rating} | {result.year}
+                            <p className="text-white text-opacity-50 text-2xs sm:text-base">
+                                {result.type === "Movie" ? "Movie" : `${result.episodes} Episodes`} | {result.rating} {result.year && "| " + result.year}
                             </p>
                             <div className="hidden sm:flex sm:flex-row sm:gap-3 sm:mt-3">
                                 <FButton type="single" mode="normal" onClick={() => { navigate(`/anime/${result.mal_id}`) }}><PlayIcon /></FButton>

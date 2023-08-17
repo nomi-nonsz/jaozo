@@ -32,13 +32,21 @@ function Navbar ({ pages }) {
         );
     }
 
-    function MobileList ({ name, childs }) {
+    function MobileList ({ name, url, childs }) {
         const [dropped, setDrop] = useState(false);
+
+        const toggleDrop = () => {
+            if (childs) setDrop(!dropped)
+            else {
+                setNav(!showNav);
+                navigate(url);
+            }
+        }
 
         return (
             <li className="">
-                <div className={"py-3 flex flex-row items-center " + (childs && "justify-between")} onClick={() => { setDrop(!dropped) }}>
-                    <div className="text-xl font-montserrat">{name}</div>
+                <div className={"py-3 flex flex-row items-center " + (childs && "justify-between")} onClick={toggleDrop}>
+                    <div className="text-base sm:text-xl font-montserrat">{name}</div>
                     {childs && <div className={"transition duration-200 " + (!dropped ? "rotate-0" : "rotate-180")}><DownArrow /></div>}
                 </div>
                 {childs && <div className={"grid overflow-hidden transition-all duration-200 " + (dropped ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
@@ -56,7 +64,7 @@ function Navbar ({ pages }) {
     // I don't have a chance for that
     return (
         <>
-            <nav className="py-7 px-12 lg:px-20 xl:px-40 flex justify-between items-center relative">
+            <nav className="z-50 py-7 px-7 sm:px-12 lg:px-20 xl:px-40 flex justify-between items-center relative">
                 <Link to="/">
                     <Logo width={74.7} />
                 </Link>
@@ -92,8 +100,8 @@ function Navbar ({ pages }) {
                     </div>
                 </div>
             </nav>
-            <nav className={"lg:hidden fixed top-0 block w-screen h-screen bg-black text-white transition-all duration-500 " + (showNav ? "left-0 bg-opacity-50" : "left-[100vw] bg-opacity-0")}>
-                <nav className={"absolute overflow-y-scroll w-[80vw] border-s border-pit-primary border-opacity-40 h-screen bg-dark-primary top-0 p-10 transition-all duration-500 " + (showNav ? "right-0" : "-right-[20vw]")}>
+            <nav className={"z-50 lg:hidden fixed top-0 block w-screen h-screen bg-black text-white transition-[left,background-color] duration-500 " + (showNav ? "left-0 bg-opacity-50" : "left-[100vw] bg-opacity-0")}>
+                <nav className={"absolute overflow-y-scroll w-[80vw] border-s border-pit-primary border-opacity-40 h-screen bg-dark-primary top-0 p-7 xs:p-10 transition-[right] duration-500 " + (showNav ? "right-0" : "-right-[20vw]")}>
                     <button className="relative w-[50px] h-[50px] border rounded-md mb-4 border-pit-primary border-opacity-50" onClick={() => { setNav(false) }}>
                         <div className="bg-white absolute w-[30px] h-[4px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-45"></div>
                         <div className="bg-white absolute w-[30px] h-[4px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -rotate-45"></div>
@@ -104,7 +112,7 @@ function Navbar ({ pages }) {
                     <ul className="flex flex-col">
                         {pages.map((page, key) => {
                             return (
-                                <MobileList name={page.name} childs={page.child} key={key} />
+                                <MobileList name={page.name} childs={page.child} url={page.url} key={key} />
                             );
                         })}
                     </ul>
