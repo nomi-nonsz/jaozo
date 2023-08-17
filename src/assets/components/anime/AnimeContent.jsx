@@ -4,40 +4,45 @@ import EpisodeGrid from './EpisodeGrid';
 import { ReactComponent as StarIcon } from '../../icons/star.svg';
 import { ReactComponent as PlayIcon } from '../../icons/play.svg';
 import { ReactComponent as MarkIcon } from '../../icons/mark.svg';
+import { Link } from 'react-router-dom';
 
 function AnimeContent ({animeData, episodeData}) {
-    const anime = {
-        title: animeData.data.title_english ? animeData.data.title_english : animeData.data.title,
-        status: animeData.data.status,
-        genres: animeData.data.genres,
-        themes: animeData.data.themes,
-        synopsis: animeData.data.synopsis,
-        score: animeData.data.score,
-        rating: animeData.data.rating,
-        year: animeData.data.year,
-        trailer: animeData.data.trailer.embed_url,
-        trailerImage: animeData.data.trailer.images.medium_image_url,
-        episodes: episodeData.data
-    }
+    const { data } = animeData;
+    const {
+        status,
+        genres,
+        themes,
+        synopsis,
+        score,
+        rating,
+        year
+    } = data;
+
+    const title = data.title_english ? data.title_english : data.title
+    const trailer = data.trailer.embed_url;
+    const trailerImage = data.trailer.images.medium_image_url;
+    const episodes = episodeData.data;
 
     const [expandSynopsis, toggleSynopsis] = useState(false);
     const synopsisMaxLength = 150;
 
     const [expandEpisodes, toggleEpisodes] = useState(false);
 
-    function TagsElement ({ children }) {
+    function TagsElement ({ to, children }) {
         return (
-            <button className="px-5 py-1 rounded bg-border-primary bg-opacity-30 hover:bg-opacity-20 transition duration-150 text-sm">{children}</button>
+            <Link to={to}>
+                <button className="px-5 py-1 rounded bg-border-primary bg-opacity-30 hover:bg-opacity-50 transition duration-150 text-sm">{children}</button>
+            </Link>
         );
     }
 
     return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-6 pt-10'>
         <section className='flex flex-col md:flex-row gap-8'>
             <div className="relative md:flex-1 w-full h-[315px] md:w-[560px] md:h-[315px]">
                 <iframe
                     className="rounded-xl absolute z-10 w-full h-full"
-                    src={anime.trailer}
+                    src={trailer}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
@@ -55,7 +60,7 @@ function AnimeContent ({animeData, episodeData}) {
                         opacity-30
                     `}
                     style={{
-                        background: `url('${anime.trailerImage}')`
+                        background: `url('${trailerImage}')`
                     }}
                 ></div>
                 <div
@@ -70,16 +75,16 @@ function AnimeContent ({animeData, episodeData}) {
                         h-full
                     `}
                     style={{
-                        backgroundImage: `url('${anime.trailerImage}')`
+                        backgroundImage: `url('${trailerImage}')`
                     }}
                 ></div>
             </div>
             <div className="text-white md:flex-1 flex flex-col gap-4">
                 <header className='font-bold font-montserrat'>
                     <div className="text-3xl">
-                        {anime.title}
+                        {title}
                     </div>
-                    <div className="text-xl text-primary">{animeData.data.status}</div>
+                    <div className="text-xl text-primary">{status}</div>
                 </header>
                 <div className="font-noto-sans">
                     <article className="relative">
@@ -95,16 +100,16 @@ function AnimeContent ({animeData, episodeData}) {
                             before:bg-gradient-to-b
                             before:pointer-events-none
                         `}>
-                            {anime.synopsis &&
+                            {synopsis &&
                                 !expandSynopsis ? 
-                                    anime.synopsis.length > synopsisMaxLength ? anime.synopsis.slice(0, synopsisMaxLength) + "..." : anime.synopsis :
-                                    anime.synopsis
+                                    synopsis.length > synopsisMaxLength ? synopsis.slice(0, synopsisMaxLength) + "..." : synopsis :
+                                    synopsis
                                 
                             }
                         </p>
                     </article>
-                    {anime.synopsis &&
-                        anime.synopsis.length > synopsisMaxLength && <button className="text-primary" onClick={() => { toggleSynopsis(!expandSynopsis) }}>
+                    {synopsis &&
+                        synopsis.length > synopsisMaxLength && <button className="text-primary" onClick={() => { toggleSynopsis(!expandSynopsis) }}>
                             {expandSynopsis ? "Read Less" : "Read More"
                     }
                     </button>}
@@ -112,16 +117,16 @@ function AnimeContent ({animeData, episodeData}) {
                 <div className="flex flex-row items-center gap-4">
                     <div className="border-2 flex flex-row font-bold leading-8 p-1 gap-1 w-20 justify-center items-center border-gold text-gold rounded-md">
                         <div><StarIcon /></div>
-                        <div>{anime.score}</div>
+                        <div>{score}</div>
                     </div>
-                    <div className="font-bold font-noto-sans text-lg">{anime.rating} | {anime.year}</div>
+                    <div className="font-bold font-noto-sans text-lg">{rating} | {year}</div>
                 </div>
                 <div className="flex flex-row flex-wrap items-center gap-4">
-                    {anime.genres.map((g, k) => {
-                        return <TagsElement key={k}>{g.name}</TagsElement>
+                    {genres.map(({ name }, k) => {
+                        return <TagsElement to={"/genre/" + name.toLowerCase()} key={k}>{name}</TagsElement>
                     })}
-                    {anime.themes.map((t, k) => {
-                        return <TagsElement key={k}>{t.name}</TagsElement>
+                    {themes.map(({ name }, k) => {
+                        return <TagsElement to={"/theme/" + name.toLowerCase()} key={k}>{name}</TagsElement>
                     })}
                 </div>
                 <div className="flex flex-row gap-4">
@@ -152,17 +157,17 @@ function AnimeContent ({animeData, episodeData}) {
                     gap-4
                     overflow-y-hidden`}
                 style={{ height: expandEpisodes ? "fit-content" : "480px" }}>
-                { anime.episodes.map((episode, key) => {
+                { episodes.map((episode, key) => {
                     return (
                         <EpisodeGrid
                             key={key}
                             id={episode.mal_id}
                             title={episode.title}
-                            img={anime.trailerImage}
+                            img={trailerImage}
                         />
                     )
                 }) }
-                {anime.episodes.length >= 8 && 
+                {episodes.length >= 8 && 
                     <button className={"absolute inset-x-0 mx-0 z-10 text-lg text-pit-primary " + (expandEpisodes ? "-bottom-1" : "bottom-5")} onClick={() => { toggleEpisodes(!expandEpisodes) }}>
                         {expandEpisodes ? "Show less" : "Show more episodes"}
                     </button>
