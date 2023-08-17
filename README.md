@@ -57,6 +57,9 @@ yarn tbuild && yarn vite build
     yarn build
     ```
 
+# Contribution
+
+To our potential contributions. We haven't determined the terms and conditions for contributing, but for now you can only suggest anime lists based on the id in the [custom-anime](./src/assets/data/custom-anime/) directory.
 
 # React + Vite
 
