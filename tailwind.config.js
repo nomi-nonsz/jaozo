@@ -14,6 +14,7 @@ export default {
       colors: {
         'primary': "#4200FF",
         'dark-primary': "#000014",
+        'dark-pit-primary': "#08082E",
         'border-primary': "#4943FF",
         'pit-primary': "#AEABFF",
         'yawn-primary': "#01001E",

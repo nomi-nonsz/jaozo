@@ -15,6 +15,8 @@ import RowList from "../components/anime/lists/RowList";
 function Home () {
     const [statusError, setError] = useState(null);
 
+    // const [recomended, setRecommend] = useState(null);
+
     // Bro is too many 😭️😭️😭️😭️
     const { content, setContent } = useContext(FeaturedContext);
     const {

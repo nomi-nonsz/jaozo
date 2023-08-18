@@ -12,15 +12,15 @@ export default function SearchBar ({ placeholder, theme }) {
         switch (theme) {
             case 'original':
                 setBtnTheme("bg-primary hover:bg-border-primary text-white");
-                setInpTheme("ps-5");
+                setInpTheme("ps-[72px]");
                 break;
             case 'darked':
                 setBtnTheme('bg-transparent hover:bg-transparent text-pit-primary');
-                setInpTheme("ps-0");
+                setInpTheme("ps-14");
                 break;
             default:
                 setBtnTheme("bg-primary hover:bg-border-primary text-white");
-                setInpTheme("ps-5");
+                setInpTheme("ps-[72px]");
         }
     }, [theme]);
 
@@ -41,11 +41,11 @@ export default function SearchBar ({ placeholder, theme }) {
     }
 
     return (
-        <form onSubmit={handleSearch}>
-            <div className='flex flex-row h-14 sm:w-96 mx-auto rounded-md bg-dark-primary border border-border-primary border-opacity-30'>
+        <form onSubmit={handleSearch} className="searchbar">
+            <div className='relative sm:w-96 h-14 mx-auto'>
                 <button
                     type="submit"
-                    className={btnTheme + " transition duration-200 w-16 h-full grid items-center rounded-s-md"}
+                    className={btnTheme + " transition absolute left-0 duration-200 w-14 h-full grid items-center rounded-s-md"}
                     >
                         <SearchIcon width={17} center={true} />
                     </button>
@@ -55,7 +55,7 @@ export default function SearchBar ({ placeholder, theme }) {
                     onChange={handleChange}
                     value={query}
                     placeholder={placeholder}
-                    className={inpTheme + " h-full w-full bg-transparent text-white font-noto-sans placeholder:text-sm placeholder:text-pit-primary placeholder:text-opacity-50"}
+                    className={inpTheme + " w-full h-full rounded-md bg-dark-primary focus:bg-black focus:bg-opacity-60 border border-pit-primary border-opacity-20 focus:border-border-primary focus:border-opacity-60 text-pit-primary outline-none font-noto-sans placeholder:text-sm placeholder:text-pit-primary placeholder:text-opacity-50 transition"}
                 />
             </div>
         </form>
