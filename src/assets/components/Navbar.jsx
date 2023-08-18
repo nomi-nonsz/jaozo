@@ -32,6 +32,32 @@ function Navbar ({ pages }) {
         );
     }
 
+    function DesktopList ({pg}) {
+        return (
+            !pg ?
+            <div className="h-8 w-16 bg-white bg-opacity-30 relative rounded"></div> :
+            <div
+                className="text-lg py-4 relative group">
+                <Link to={pg.url} className={"flex flex-row items-center gap-3 group " + styles.navItems}>
+                    <div>{pg.name}</div>
+                    {pg.child && <div className="rotate-0 group-hover:rotate-180 transition duration-200"><DownArrow /></div>}
+                </Link>
+                {pg.child && (
+                    <div className="absolute w-0 h-0 group-hover:w-fit group-hover:h-fit grid grid-rows-6 grid-flow-col z-50 opacity-0 group-hover:opacity-100 overflow-y-hidden transition-opacity duration-200 top-14 left-0 p-0 group-hover:p-3 rounded-lg bg-dark-primary">
+                        {pg.child.map((chi, f) => {
+                            return (
+                                <Link key={f} to={chi.url} className={"font-noto-sans text-base block w-full whitespace-nowrap py-2 ps-4 pe-14 hover:bg-pit-primary hover:bg-opacity-20 rounded-md duration-75 " + styles.navItems}>
+                                    {chi.name}
+                                </Link>
+                            )
+                        })}
+                    </div>
+                )}
+            </div>
+        )
+
+    }
+
     function MobileList ({ name, url, childs }) {
         const [dropped, setDrop] = useState(false);
 
@@ -71,27 +97,7 @@ function Navbar ({ pages }) {
                 <div className="font-montserrat">
                     <div className="gap-14 h-full items-center hidden lg:flex">
                         {pages.map((p, k) => {
-                            return (
-                                <div
-                                    className="text-lg py-4 relative group"
-                                    key={k}>
-                                    <Link to={p.url} className={"flex flex-row items-center gap-3 group " + styles.navItems}>
-                                        <div>{p.name}</div>
-                                        {p.child && <div className="rotate-0 group-hover:rotate-180 transition duration-200"><DownArrow /></div>}
-                                    </Link>
-                                    {p.child && (
-                                        <div className="absolute w-0 h-0 group-hover:w-fit group-hover:h-fit grid grid-rows-6 grid-flow-col z-50 opacity-0 group-hover:opacity-100 overflow-y-hidden transition-opacity duration-200 top-14 left-0 p-0 group-hover:p-3 rounded-lg bg-dark-primary">
-                                            {p.child.map((chi, f) => {
-                                                return (
-                                                    <Link key={f} to={chi.url} className={"font-noto-sans text-base block w-full whitespace-nowrap py-2 ps-4 pe-14 hover:bg-pit-primary hover:bg-opacity-20 rounded-md duration-75 " + styles.navItems}>
-                                                        {chi.name}
-                                                    </Link>
-                                                )
-                                            })}
-                                        </div>
-                                    )}
-                                </div>
-                            )
+                            return <DesktopList pg={p} key={k} />
                         })}
                         <SearchBar placeholder="One Piece, Naruto..." theme='darked' />
                     </div>
@@ -110,11 +116,11 @@ function Navbar ({ pages }) {
                         <SearchBar placeholder="One Piece, Naruto..." theme='darked' />
                     </div>
                     <ul className="flex flex-col">
-                        {pages.map((page, key) => {
+                        {/* {pages.map((page, key) => {
                             return (
                                 <MobileList name={page.name} childs={page.child} url={page.url} key={key} />
                             );
-                        })}
+                        })} */}
                     </ul>
                 </nav>
             </nav>

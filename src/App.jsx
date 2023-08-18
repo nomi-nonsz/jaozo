@@ -26,7 +26,7 @@ import pages from './assets/data/pages.json';
 import { FeaturedContext } from './assets/context/featuredContext';
 
 function App() {
-  const [rpages, setPages] = useState([]);
+  const [rpages, setPages] = useState([...pages].map(v => null));
   let isRequest = false;
 
   const [homeContent, setContent] = useState({
@@ -44,7 +44,6 @@ function App() {
 
   // kecuali kalo pake useContext
   useEffect(() => {
-    
     if (!isRequest) {
       getGenres().then((data) => {
           pages[1].child = data;
