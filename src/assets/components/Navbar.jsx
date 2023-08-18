@@ -80,10 +80,10 @@ function Navbar ({ pages }) {
                                         {p.child && <div className="rotate-0 group-hover:rotate-180 transition duration-200"><DownArrow /></div>}
                                     </Link>
                                     {p.child && (
-                                        <div className="absolute z-50 h-0 opacity-0 group-hover:h-fit p-0 group-hover:opacity-100 overflow-y-hidden transition-all duration-100 top-14 left-0 w-fit group-hover:p-5 group-hover:pe-14 rounded-lg bg-dark-primary">
+                                        <div className="absolute w-0 h-0 group-hover:w-fit group-hover:h-fit grid grid-rows-6 grid-flow-col z-50 opacity-0 group-hover:opacity-100 overflow-y-hidden transition-opacity duration-200 top-14 left-0 p-0 group-hover:p-3 rounded-lg bg-dark-primary">
                                             {p.child.map((chi, f) => {
                                                 return (
-                                                    <Link key={f} to={chi.url} className={"font-noto-sans text-base my-2 inline-block " + styles.navItems}>
+                                                    <Link key={f} to={chi.url} className={"font-noto-sans text-base block w-full whitespace-nowrap py-2 ps-4 pe-14 hover:bg-pit-primary hover:bg-opacity-20 rounded-md duration-75 " + styles.navItems}>
                                                         {chi.name}
                                                     </Link>
                                                 )

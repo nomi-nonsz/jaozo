@@ -58,7 +58,7 @@ async function fetchAnime (url, config) {
 export async function getGenres () {
     try {
         const res = await fetchAnime(`https://api.jikan.moe/v4/genres/anime`);
-        const populary = res.data.filter(val => val.count > 1500);
+        const populary = res.data.filter(val => val.count > 1000);
         const genres = [];
 
         populary.forEach(v => {
