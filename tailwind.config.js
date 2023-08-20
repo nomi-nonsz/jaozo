@@ -18,6 +18,7 @@ export default {
         'border-primary': "#4943FF",
         'pit-primary': "#AEABFF",
         'yawn-primary': "#06061A",
+        'yolo-primary': "#9C79FF",
         'gold': "#FF9900"
       },
       width: {

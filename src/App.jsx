@@ -16,6 +16,7 @@ import Landing from './assets/pages/landing'
 import Anime from './assets/pages/anime'
 import Search from './assets/pages/search'
 import Home from './assets/pages/home';
+import Genres from './assets/pages/genres';
 import NotFound404 from './assets/pages/NotFound404';
 import Wewew from './assets/pages/wewew';
 
@@ -64,6 +65,7 @@ function App() {
           <Route path='/search' element={ <Search /> } />
           <Route path='/anime' element={ <Home /> } />
           <Route path='/anime/:animeId' element={ <Anime /> } />
+          <Route path='/genre' element={ <Genres /> } />
           <Route path='/wew' element={ <Wewew /> } />
           <Route path='*' element={ <NotFound404 /> } />
         </Routes>
