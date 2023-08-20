@@ -21,6 +21,10 @@ export default {
         'yolo-primary': "#9C79FF",
         'gold': "#FF9900"
       },
+      backgroundSize: {
+        'zoom': '100%',
+        'zoomed': '110%'
+      },
       width: {
         'xl': '1280px',
         'lg': '1080px',
