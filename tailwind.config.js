@@ -17,7 +17,7 @@ export default {
         'dark-pit-primary': "#08082E",
         'border-primary': "#4943FF",
         'pit-primary': "#AEABFF",
-        'yawn-primary': "#01001E",
+        'yawn-primary': "#06061A",
         'gold': "#FF9900"
       },
       width: {

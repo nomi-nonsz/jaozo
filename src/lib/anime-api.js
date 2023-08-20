@@ -57,8 +57,8 @@ async function fetchAnime (url, config) {
 // nyoba ngambil genre, tapi dikembalikan dalam bentuk objek
 export async function getGenres () {
     try {
-        const res = await fetchAnime(`https://api.jikan.moe/v4/genres/anime`);
-        const populary = res.data.filter(val => val.count > 1000);
+        const res = await fetchAnime(`https://api.jikan.moe/v4/genres/anime`, { params: { filter: "genres" } });
+        const populary = res.data;
         const genres = [];
 
         populary.forEach(v => {

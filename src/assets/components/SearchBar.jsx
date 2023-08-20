@@ -55,7 +55,7 @@ export default function SearchBar ({ placeholder, theme }) {
                     onChange={handleChange}
                     value={query}
                     placeholder={placeholder}
-                    className={inpTheme + " w-full h-full rounded-md bg-dark-primary focus:bg-black focus:bg-opacity-60 border border-pit-primary border-opacity-20 focus:border-border-primary focus:border-opacity-60 text-pit-primary outline-none font-noto-sans placeholder:text-sm placeholder:text-pit-primary placeholder:text-opacity-50 transition"}
+                    className={inpTheme + " w-full h-full rounded-md bg-dark-primary focus:bg-black focus:bg-opacity-60 border border-pit-primary border-opacity-20 focus:border-border-primary focus:border-opacity-60 text-white outline-none font-noto-sans placeholder:text-sm placeholder:text-pit-primary placeholder:text-opacity-50 transition"}
                 />
             </div>
         </form>
