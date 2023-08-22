@@ -4,6 +4,18 @@ import { ReactComponent as MarkIcon } from "../../../icons/mark.svg";
 import { ReactComponent as StarIcon } from "../../../icons/star.svg";
 
 function Anime ({ anime }) {
+    if (!anime) {
+        return (
+            <div className="col-span-2 flex flex-col gap-5">
+                <div className="w-full h-[350px] fronta-loading rounded-md"></div>
+                <div className="flex flex-col gap-3">
+                    <div className="w-[80%] fronta-loading h-8 rounded"></div>
+                    <div className="w-[30%] fronta-loading h-5 rounded"></div>
+                </div>
+            </div>
+        )
+    }
+
     const save = (e) => {
         e.preventDefault();
     }
@@ -81,12 +93,11 @@ function Anime ({ anime }) {
 }
 
 function LongAnime ({ anime }) {
+    const navigate = useNavigate();
     const { genres, mal_id, episodes } = anime;
 
     const title = anime.title_english || anime.title;
     const genre = genres.length > 1 ? genres[Math.floor(Math.random() * genres.length)] : genres[0];
-
-    const navigate = useNavigate();
 
     const navto = () => {
         navigate("" + genre.name.toLowerCase().replace(/\s+/g, "-"))

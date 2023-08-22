@@ -46,26 +46,36 @@ function Home () {
     const fetchAnime = async () => {
         try {
             // i got rate limited fr 💀️💀️💀️
+            // still better than yandere simp
             const hot = await getTrendingAnime();
             const top = await getTopAnime();
-            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            const hotSummary = [...hot.data].slice(0, 10);
+            
+            setContent({ hot, hotSummary, top });
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
             const eps = await getLatestEpisode();
             const genres = await getGenres();
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            const airing = await getTopAnime("airing");
-            const upcoming = await getTopAnime("upcoming");
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            const popular = await getTopAnime("bypopularity");
-            
-            const hotSummary = [...hot.data].slice(0, 10);
             
             const epsSummary = [...eps.data].slice(0, 25);
             const eps_locked = epsSummary.filter(ep => ep.region_locked == true);
             const eps_unlocked = epsSummary.filter(ep => ep.region_locked == false);
             const eps_filtered = [...eps_unlocked, ...eps_locked];
-            
+
             const genreSummary = genres.slice(0, 10);
 
+            setContent({ hot, hotSummary, top, eps: eps_filtered, genre: genreSummary });
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            const airing = await getTopAnime("airing");
+            const upcoming = await getTopAnime("upcoming");
+            
+            setContent({ hot, hotSummary, top, eps: eps_filtered, genre: genreSummary, airing, upcoming });
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            const popular = await getTopAnime("bypopularity");
+            
             setContent({
                 hot: hot,
                 hotSummary: hotSummary,
@@ -107,35 +117,38 @@ function Home () {
     }, []);
 
     return statusError ? <Loading error={statusError} /> :
-        (!hotSummaryAnime && !hotAnime ? <Loading>Fetching Data</Loading> : (
+        (!hotSummaryAnime ? <Loading>Fetching Data</Loading> : (
         <>
             <Featured data={hotSummaryAnime} />
             <main className="text-white base-container">
                 <div className="flex flex-col gap-10 py-5">
-                    <RowList title="Hot now 🔥" model="anime" data={hotAnime.data} />
+                    { hotAnime ?
+                        <RowList.Anime title="Hot now 🔥" data={hotAnime.data} /> :
+                        <RowList.Anime.Loading />
+                    }
                     { airingAnime ?
-                        <RowList title="Airing now ✨️" model="anime" data={airingAnime.data} /> :
-                        <Loading>Get anime data</Loading>
+                        <RowList.Anime title="Airing now ✨️" data={airingAnime.data} /> :
+                        <RowList.Anime.Loading />
                     }
                     { epsAnime ?
-                        <RowList title="Latest Updated Episode 🗣️" model="anime" data={epsAnime} /> :
-                        <Loading>Get anime data</Loading>
+                        <RowList.Anime title="Latest Updated Episode 🗣️" data={epsAnime} /> :
+                        <RowList.Anime.Loading />
                     }
                     { genresAnime ?
-                        <RowList title="By Genres 🤸‍♀️️" model="categories" data={genresAnime} /> :
-                        <Loading>Get anime data</Loading>
+                        <RowList.Categories title="By Genres 🤸‍♀️️" data={genresAnime} /> :
+                        <Loading>Get Genres</Loading>
                     }
                     { popularAnime ?
-                        <RowList title="Most Popular 🙌" model="anime" data={popularAnime.data} /> :
-                        <Loading>Get anime data</Loading>
+                        <RowList.Anime title="Most Popular 🙌" data={popularAnime.data} /> :
+                        <RowList.Anime.Loading />
                     }
                     { topAnime ?
-                        <RowList title="Top Anime 🏅️" model="anime" data={topAnime.data} /> :
-                        <Loading>Get anime data</Loading>
+                        <RowList.Anime title="Top Anime 🏅️" data={topAnime.data} /> :
+                        <RowList.Anime.Loading />
                     }
                     { upcomingAnime ?
-                        <RowList title="Coming Soon ⏰" model="anime" data={upcomingAnime.data} /> :
-                        <Loading>Get anime data</Loading>
+                        <RowList.Anime title="Coming Soon ⏰" data={upcomingAnime.data} /> :
+                        <RowList.Anime.Loading />
                     }
                 </div>
             </main>

@@ -24,7 +24,7 @@ function Loading ({ error, children }) {
             },
             429: {
                 error: "Too Many Request!",
-                message: <>This message appears when sending requests to the server repeatedly with a short period of time, usually occurs due to a rate limit from the server. if this message keeps appearing, <OLink href="https://github.com/norman-andrians/jaozo/issues" blank={true}>report bug</OLink></>
+                message: <>This message appears when sending requests to the server repeatedly with a short period of time, usually happens because you refresh the page <b>repeatedly</b> for too short a time. if this message keeps appearing, <OLink href="https://github.com/norman-andrians/jaozo/issues" blank={true}>report bug</OLink></>
             }
         };
 

@@ -71,6 +71,25 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-rows: 1fr;
 }
 
+.fronta-loading {
+    @apply bg-white bg-opacity-20 relative overflow-hidden;
+}
+.fronta-loading::before {
+    content: "";
+    @apply absolute w-full h-full top-0 left-0;
+    background: linear-gradient(90deg, transparent 10%, #ffffff1e 50%, transparent 90%);
+    animation: fronta-anim .5s linear infinite;
+}
+
+@keyframes fronta-anim {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
 @keyframes towew {
     0% {
         transform: scale(0.9, 1) translateY(-4px);
