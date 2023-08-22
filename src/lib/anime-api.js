@@ -1,8 +1,7 @@
 import axios from "axios";
 
 // backend url
-const momoko_domain = "";
-const local_domain = "http://localhost:6969";
+const BACKEND_DOMAIN = import.meta.env.VITE_HOSTED_BACKEND || import.meta.env.VITE_LOCAL_BACKEND;
 
 /* ------------------------- */
 // 
@@ -100,7 +99,7 @@ export function getAnime (id) {
 
 export async function getMultipleAnime (ids) {
     try {
-        const animes = await axios.get(`${local_domain}/anime`, {
+        const animes = await axios.get(`${BACKEND_DOMAIN}/anime`, {
             params: {
                 mal_id: ids
             }

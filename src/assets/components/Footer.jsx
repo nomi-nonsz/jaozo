@@ -23,7 +23,7 @@ function Footer () {
                 <section className="flex flex-row gap-8">
                     {navigation.map((nav, k) => {
                         return (
-                            <div className="flex flex-col gap-1" key={k}>
+                            <div className="flex flex-col gap-3" key={k}>
                                 <h2 className="text-xl">{nav.name}</h2>
                                 <ul className="text-sm flex flex-col gap-1">
                                     {nav.navs.map((chd, kc) => {

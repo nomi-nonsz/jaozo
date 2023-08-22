@@ -1,33 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from 'react-router-dom'
-import './dist/main.css'; // the css
-import { getGenres } from './lib/anime-api' // that api script
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./dist/main.css"; // the css
+import { getGenres } from "./lib/anime-api"; // that api script
 
 // Static components
-import Navbar from './assets/components/Navbar'
-import Footer from './assets/components/Footer'
+import Navbar from "./assets/components/Navbar";
+import Footer from "./assets/components/Footer";
 
 // Pages
-import Landing from './assets/pages/landing'
-import Anime from './assets/pages/anime'
-import Search from './assets/pages/search'
-import Home from './assets/pages/home';
-import Genres from './assets/pages/genres';
-import NotFound404 from './assets/pages/NotFound404';
-import Wewew from './assets/pages/wewew';
+import Landing from "./assets/pages/landing";
+import Anime from "./assets/pages/anime";
+import Search from "./assets/pages/search";
+import Home from "./assets/pages/home";
+import Genres from "./assets/pages/genres";
+import NotFound404 from "./assets/pages/NotFound404";
+import Wewew from "./assets/pages/wewew";
 
 // Data
-import pages from './assets/data/pages.json';
+import pages from "./assets/data/pages.json";
 
 // Context
-import { FeaturedContext } from './assets/context/featuredContext';
+import { FeaturedContext } from "./assets/context/featuredContext";
 
 function App() {
-  const [rpages, setPages] = useState([...pages].map(v => null));
+  const [rpages, setPages] = useState([...pages].map((v) => null));
   let isRequest = false;
 
   const [homeContent, setContent] = useState({
@@ -39,21 +35,25 @@ function App() {
       genre: null,
       airing: null,
       upcoming: null,
-      popular: null
-    }
+      popular: null,
+    },
   });
 
   // kecuali kalo pake useContext
   useEffect(() => {
     if (!isRequest) {
-      getGenres().then((data) => {
+      getGenres()
+        .then((data) => {
           pages[1].child = data;
-        }).finally(() => {
+        })
+        .finally(() => {
           setPages(pages);
-      })
+        });
     }
 
-    return () => { isRequest = true }
+    return () => {
+      isRequest = true;
+    };
   }, []);
 
   return (
@@ -61,18 +61,18 @@ function App() {
       <Router>
         <Navbar pages={rpages} />
         <Routes>
-          <Route path='/' element={ <Landing /> } />
-          <Route path='/search' element={ <Search /> } />
-          <Route path='/anime' element={ <Home /> } />
-          <Route path='/anime/:animeId' element={ <Anime /> } />
-          <Route path='/genre' element={ <Genres /> } />
-          <Route path='/wew' element={ <Wewew /> } />
-          <Route path='*' element={ <NotFound404 /> } />
+          <Route path="/" element={<Landing />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/anime" element={<Home />} />
+          <Route path="/anime/:animeId" element={<Anime />} />
+          <Route path="/genre" element={<Genres />} />
+          <Route path="/wew" element={<Wewew />} />
+          <Route path="*" element={<NotFound404 />} />
         </Routes>
         <Footer />
       </Router>
     </FeaturedContext.Provider>
-  )
+  );
 }
 
-export default App
+export default App;

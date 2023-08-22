@@ -14,6 +14,16 @@ function Navbar ({ pages }) {
     
     const [showNav, setNav] = useState(false);
     
+    const onSearch = (e, query) => {
+        const q = query;
+
+        e.preventDefault();
+
+        if (query.length > 0) {
+          navigate(`/search?query=${encodeURIComponent(q)}`);
+        }
+    };
+    
     // The worst component
     function Hamburger () {
         const [dropped, setDrop] = useState(false);
@@ -107,7 +117,7 @@ function Navbar ({ pages }) {
                         {pages.map((p, k) => {
                             return <DesktopList pg={p} key={k} />
                         })}
-                        <SearchBar placeholder="One Piece, Naruto..." theme='darked' />
+                        <SearchBar placeholder="One Piece, Naruto..." theme='darked' handleSearch={onSearch} />
                     </div>
                     <div className="h-full items-center block lg:hidden">
                         <Hamburger />
@@ -121,7 +131,7 @@ function Navbar ({ pages }) {
                         <div className="bg-white absolute w-[30px] h-[4px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -rotate-45"></div>
                     </button>
                     <div className="mb-5 sm:flex sm:justify-start">
-                        <SearchBar placeholder="One Piece, Naruto..." theme='darked' />
+                        <SearchBar placeholder="One Piece, Naruto..." theme='darked' handleSearch={onSearch} />
                     </div>
                     <ul className="flex flex-col">
                         {pages.map((page, key) => {

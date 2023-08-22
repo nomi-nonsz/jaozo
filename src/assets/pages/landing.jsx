@@ -9,6 +9,17 @@ import OLink from '../components/links/OLink'
 function Landing() {
   const navigate = useNavigate();
 
+  
+  const onSearch = (e, query) => {
+    const q = query;
+
+    e.preventDefault();
+
+    if (query.length > 0) {
+      navigate(`/search?query=${encodeURIComponent(q)}`);
+    }
+  };
+
   return (
     <main className='text-white base-container'>
       <div className="py-24 flex flex-col gap-8">
@@ -20,6 +31,7 @@ function Landing() {
           <SearchBar
             placeholder="Type anime like One Piece, Jujutsu Kaisen..."
             theme='original'
+            handleSearch={onSearch}
             />
           <OButton click={() => navigate("/anime")} className="mt-4">
             Browse Anime

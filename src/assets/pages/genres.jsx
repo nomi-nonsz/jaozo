@@ -80,7 +80,7 @@ function Genres () {
 
         return (
             <>
-                <div className={"relative before:content-[''] before:pointer-events-none before:z-10 before:absolute before:w-full before:bottom-0 before:h-1/4 before:bg-gradient-to-b before:from-transparent before:to-yawn-primary overflow-y-hidden " + (isDroppin ? "h-[720px] before:block" : "h-auto before:hidden")}>
+                <div className={"relative before:content-[''] before:pointer-events-none before:z-10 before:absolute before:w-full before:bottom-0 before:h-1/4 before:bg-gradient-to-b before:from-transparent before:to-yawn-primary overflow-y-hidden " + (isDroppin ? "h-auto before:hidden" : "h-[720px] before:block")}>
                     <div className="grid grid-cols-2 gap-8">
                     {trendingAnime.map((anime, key) => {
                         return <ColList.LongAnime anime={anime} key={key} />

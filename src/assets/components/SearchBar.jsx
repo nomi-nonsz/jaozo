@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import SearchIcon from "./icons/SearchIcon"
 import { useNavigate } from "react-router-dom";
 
-export default function SearchBar ({ placeholder, theme }) {
+export default function SearchBar ({ placeholder, handleSearch, theme }) {
     const navigate = useNavigate();
     const [query, setQuery] = useState("");
     const [btnTheme, setBtnTheme] = useState("");
@@ -24,16 +24,8 @@ export default function SearchBar ({ placeholder, theme }) {
         }
     }, [theme]);
 
-    const handleSearch = (e) => {
-        const q = query;
-
-        e.preventDefault();
-
-        if (query.length > 0) {
-            setQuery("");
-            navigate(`/search?query=${encodeURIComponent(q)}`);
-        }
-
+    const onSearch = (e) => {
+        handleSearch(e, query);
     }
 
     const handleChange = (e) => {
@@ -41,7 +33,7 @@ export default function SearchBar ({ placeholder, theme }) {
     }
 
     return (
-        <form onSubmit={handleSearch} className="searchbar">
+        <form onSubmit={onSearch} className="searchbar">
             <div className='relative sm:w-96 h-14 mx-auto'>
                 <button
                     type="submit"
