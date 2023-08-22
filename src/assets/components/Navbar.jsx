@@ -56,7 +56,7 @@ function Navbar ({ pages }) {
                     <div className="absolute w-0 h-0 group-hover:w-fit group-hover:h-fit grid grid-rows-6 grid-flow-col z-50 opacity-0 group-hover:opacity-100 overflow-y-hidden transition-opacity duration-200 top-14 left-0 p-0 group-hover:p-3 rounded-lg border border-pit-primary border-opacity-20 bg-dark-primary bg-opacity-90 backdrop-blur-lg">
                         {pg.child.map((chi, f) => {
                             return (
-                                <Link key={f} to={chi.url} className={"font-noto-sans text-base block w-full whitespace-nowrap py-2 ps-4 pe-14 hover:bg-pit-primary hover:bg-opacity-20 rounded-md duration-75 " + styles.navItems}>
+                                <Link key={f} to={chi.url} className={"font-noto-sans text-base block w-full whitespace-nowrap py-2 ps-4 pe-14 hover:bg-pit-primary hover:bg-opacity-10 rounded-md duration-75 " + styles.navItems}>
                                     {chi.name}
                                 </Link>
                             )

@@ -23,7 +23,7 @@ import pages from "./assets/data/pages.json";
 import { FeaturedContext } from "./assets/context/featuredContext";
 
 function App() {
-  const [rpages, setPages] = useState([...pages].map((v) => null));
+  const [rpages, setPages] = useState([...pages].fill(null));
   let isRequest = false;
 
   const [homeContent, setContent] = useState({

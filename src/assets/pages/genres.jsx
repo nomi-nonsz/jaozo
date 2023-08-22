@@ -5,19 +5,40 @@ import { getFullGenres, getGenres, getTrendingAnime } from "../../lib/anime-api"
 import featuredGenres from  "../data/custom-banner/genres.json";
 import BurriedLists from "../components/anime/lists/BurriedList";
 import { ReactComponent as LeftArrow } from "../icons/arrow-left.svg";
+import SearchBar from "../components/SearchBar";
 
 function Genres () {
     let isRequest = false;
 
     const [popularGenres, setGenres] = useState(null);
-    const [topGenres, setTop] = useState(null);
+    const [allGenres, setAll] = useState(null);
     const [mostGenres, setMost] = useState(null);
     const [trendingAnime, setAnime] = useState(null);
+
+    const [queryGenres, setQuery] = useState(null);
+
+    const handleSearch = (e, query) => {
+        e.preventDefault();
+        setQuery(query);
+    }
 
     const fetchGenres = async () => {
         try {
             const genres = await getFullGenres();
             const anime = await getTrendingAnime();
+
+            genres.sort((a, b) => {
+                const nameA = a.name.toLowerCase();
+                const nameB = b.name.toLowerCase();
+        
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+            })
 
             const featured = [];
             const most = [...genres]
@@ -52,6 +73,7 @@ function Genres () {
             const animeSummary = anime.data.slice(0, 10);
 
             setGenres(featured);
+            setAll(genres);
             setMost(most);
             setAnime(animeSummary);
 
@@ -64,12 +86,57 @@ function Genres () {
     }
 
     useEffect(() => {
+        if (queryGenres) {
+            const findedData = [...allGenres].filter(({name}) => {
+                return name.toLowerCase().includes(queryGenres);
+            })
+    
+            console.log(findedData);
+        }
+    }, [queryGenres]);
+
+    useEffect(() => {
         if (!isRequest) {
             fetchGenres();
         }
 
         return () => { isRequest = true; }
     }, []);
+
+    function ListGenres () {
+        return (
+            <div className="grid grid-cols-8 gap-4">
+                {
+                    queryGenres && queryGenres !== "" ?
+                    allGenres
+                        .filter(({name}) => {
+                            const query = queryGenres.toLowerCase();
+                            return name.toLowerCase().includes(query);
+                        })
+                        .map(({ name, count, url }, key) => {
+                            return <BurriedLists.List
+                                name={name}
+                                count={count}
+                                url={url}
+                                key={key}
+                                className="col-span-2"
+                            />
+                        })
+                    :
+                    allGenres
+                        .map(({ name, count, url }, key) => {
+                            return <BurriedLists.List
+                                name={name}
+                                count={count}
+                                url={url}
+                                key={key}
+                                className="col-span-2"
+                            />
+                        })
+                }
+            </div>
+        )
+    }
 
     function DoropAnime () {
         const [isDroppin, setDrop] = useState(false);
@@ -117,6 +184,16 @@ function Genres () {
                             })
                         ) }
                     </div>
+                </div>
+            </div>
+            <div className="grid grid-cols-10 gap-10">
+                <div className="flex flex-col gap-8 col-start-2 col-span-8">
+                    <h1 className="font-montserrat text-center text-2xl">Browse All Genres</h1>
+                    <div className="flex flex-col gap-3 text-center">
+                        <SearchBar placeholder="Find genre" theme="darked" handleSearch={handleSearch} />
+                        <p className="opacity-30">// bro actually you don't need a search bar because all genres are fewer</p>
+                    </div>
+                    { allGenres && <ListGenres /> }
                 </div>
             </div>
         </main>
