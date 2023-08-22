@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ReactComponent as LeftArrow } from "../../../icons/arrow-left.svg";
 import { ReactComponent as RightLongArrow } from "../../../icons/arrow-long-right.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LandingBanner () {
     return <>You need to choose childs</>
@@ -10,7 +10,7 @@ function LandingBanner () {
 function ShortChategories ({ data }) {
     const navigate = useNavigate();
     const [pointIndex, setIndex] = useState(0);
-    const { name, url, count } = data[pointIndex];
+    const { name, url, count, anime } = data[pointIndex];
 
     const next = () => {
         setIndex(pointIndex < data.length - 1 ? pointIndex + 1 : 0);
@@ -29,7 +29,7 @@ function ShortChategories ({ data }) {
     }, [pointIndex]);
 
     return (
-        <div className="w-full h-[380px] rounded-[24px] overflow-x-hidden relative group/bg">
+        <div className="w-full h-[380px] rounded-3xl overflow-x-hidden relative group/bg">
             <div className="flex flex-row h-full transition-all duration-700" style={{ width: data.length + "00%", transform: `translateX(-${((pointIndex * 100) / data.length) + "%"})` }}>
                 {data.map((cate, key) => {
                     return <div className="flex-1 w-full h-full bg-no-repeat bg-center bg-zoom group-hover/bg:bg-zoomed transition-all" key={key} style={{backgroundImage: `url(${cate.img})`}}></div>
@@ -55,6 +55,12 @@ function ShortChategories ({ data }) {
                     return <div className={"h-2 bg-white rounded-full transition-all cursor-pointer duration-700 " + (key === pointIndex ? "w-8" : "w-2 opacity-60")} key={key} onClick={() => { setIndex(key) }}></div>
                 })}
             </div>
+            <Link
+                to={"/anime/" + anime.mal_id}
+                className="absolute right-4 bottom-4 py-1 px-6 bg-dark-primary text-sm text-white hover:text-opacity-100 text-opacity-80 bg-opacity-40 hover:bg-opacity-80 rounded-full backdrop-blur-md transition"
+            >
+                {anime.name}
+            </Link>
         </div>
     )
 }

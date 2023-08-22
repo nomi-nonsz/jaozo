@@ -62,6 +62,15 @@ h1, h2, h3, h4, h5, h6 {
     .base-container { @apply w-xl }
 }
 
+.wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow-y: hidden;
+}
+.drop {
+    grid-template-rows: 1fr;
+}
+
 @keyframes towew {
     0% {
         transform: scale(0.9, 1) translateY(-4px);

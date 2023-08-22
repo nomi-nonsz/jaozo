@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as MarkIcon } from "../../../icons/mark.svg";
 import { ReactComponent as StarIcon } from "../../../icons/star.svg";
 
@@ -80,6 +80,36 @@ function Anime ({ anime }) {
     )
 }
 
+function LongAnime ({ anime }) {
+    const { genres, mal_id, episodes } = anime;
+
+    const title = anime.title_english || anime.title;
+    const genre = genres.length > 1 ? genres[Math.floor(Math.random() * genres.length)] : genres[0];
+
+    const navigate = useNavigate();
+
+    const navto = () => {
+        navigate("" + genre.name.toLowerCase().replace(/\s+/g, "-"))
+    }
+
+    return (
+        <div
+            className="
+                h-[280px] bg-no-repeat bg-center bg-zoom hover:bg-zoomed rounded-3xl relative transition-all cursor-pointer
+                before:absolute before:rounded-3xl before:content-[''] before:w-full before:h-full before:bg-gradient-to-b before:from-transparent before:to-dark-primary
+            "
+            style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}
+        >
+            <div className="absolute w-full h-full flex flex-col justify-end gap-1 p-8">
+                <div className="">{episodes || "No"} Episodes</div>
+                <h1 className="text-xl">{title}</h1>
+            </div>
+            <div className="absolute w-full h-full" onClick={() => { navigate("/anime/" + mal_id) }}></div>
+            <div className="absolute top-6 right-6 bg-dark-pit-primary bg-opacity-90 py-2 px-5 rounded-md font-bold text-yolo-primary text-sm" onClick={navto}>{genre.name}</div>
+        </div>
+    )
+}
+
 function Categories ({ data }) {
     return (
         <div className="col-span-2">
@@ -96,5 +126,6 @@ function ColList ({ children }) {
 
 ColList.Anime = Anime;
 ColList.Categories = Categories;
+ColList.LongAnime = LongAnime;
 
 export default ColList;
