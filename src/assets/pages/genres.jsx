@@ -6,9 +6,12 @@ import featuredGenres from  "../data/custom-banner/genres.json";
 import BurriedLists from "../components/anime/lists/BurriedList";
 import { ReactComponent as LeftArrow } from "../icons/arrow-left.svg";
 import SearchBar from "../components/SearchBar";
+import Loading from "../components/anime/Loading";
 
 function Genres () {
     let isRequest = false;
+
+    const [statusError, setError] = useState(null);
 
     const [popularGenres, setGenres] = useState(null);
     const [allGenres, setAll] = useState(null);
@@ -20,6 +23,12 @@ function Genres () {
     const handleSearch = (e, query) => {
         e.preventDefault();
         setQuery(query);
+    }
+
+    const catchError = (error) => {
+        if (error.response) {
+            setError(error.response.status);
+        }
     }
 
     const fetchGenres = async () => {
@@ -82,6 +91,7 @@ function Genres () {
         }
         catch (error) {
             console.log(error);
+            catchError(error);
         }
     }
 
@@ -165,40 +175,46 @@ function Genres () {
 
     return (
         <main className="text-white base-container py-10 flex flex-col gap-14">
-            <div className="flex flex-col gap-6">
-                <h1 className="font-montserrat text-2xl">Popular Genres</h1>
-                { popularGenres ? 
-                <LandingBanner.ShortChategories data={popularGenres} /> :
-                <LandingBanner.ShortChategories.Loading />}
-            </div>
-            <div className="grid grid-cols-10 gap-10">
-                <div className="flex flex-col gap-6 col-span-8">
-                    <h1 className="font-montserrat text-2xl">Genres from trending anime</h1>
-                    <DoropAnime />
+            {!statusError ? (
+                <>
+                <div className="flex flex-col gap-6">
+                    <h1 className="font-montserrat text-2xl">Popular Genres</h1>
+                    { popularGenres ? 
+                    <LandingBanner.ShortChategories data={popularGenres} /> :
+                    <LandingBanner.ShortChategories.Loading />}
                 </div>
-                <div className="flex flex-col gap-6 col-span-2">
-                    <h1 className="font-montserrat text-2xl">Most Genres</h1>
-                    <div className="flex flex-col gap-3">
-                        { mostGenres ? (
-                            mostGenres.map(({ name, count, url }, key) => {
-                                return <BurriedLists.List name={name} count={count} url={url} key={key} />
-                            }))
-                            :
-                            [...Array(6)].map((idk, key) => <BurriedLists.Loading key={key} />)
-                        }
+                <div className="grid grid-cols-10 gap-10">
+                    <div className="flex flex-col gap-6 col-span-8">
+                        <h1 className="font-montserrat text-2xl">Genres from trending anime</h1>
+                        <DoropAnime />
+                    </div>
+                    <div className="flex flex-col gap-6 col-span-2">
+                        <h1 className="font-montserrat text-2xl">Most Genres</h1>
+                        <div className="flex flex-col gap-3">
+                            { mostGenres ? (
+                                mostGenres.map(({ name, count, url }, key) => {
+                                    return <BurriedLists.List name={name} count={count} url={url} key={key} />
+                                }))
+                                :
+                                [...Array(6)].map((idk, key) => <BurriedLists.Loading key={key} />)
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="grid grid-cols-10 gap-10">
-                <div className="flex flex-col gap-8 col-start-2 col-span-8">
-                    <h1 className="font-montserrat text-center text-2xl">Browse All Genres</h1>
-                    <div className="flex flex-col gap-3 text-center">
-                        <SearchBar placeholder="Find genre" theme="darked" handleSearch={handleSearch} />
-                        <p className="opacity-30">// bro actually you don't need a search bar because all genres are fewer</p>
+                <div className="grid grid-cols-10 gap-10">
+                    <div className="flex flex-col gap-8 col-start-2 col-span-8">
+                        <h1 className="font-montserrat text-center text-2xl">Browse All Genres</h1>
+                        <div className="flex flex-col gap-3 text-center">
+                            <SearchBar placeholder="Find genre" theme="darked" handleSearch={handleSearch} />
+                            <p className="opacity-30">// bro actually you don't need a search bar because all genres are fewer</p>
+                        </div>
+                        { allGenres && <ListGenres /> }
                     </div>
-                    { allGenres && <ListGenres /> }
                 </div>
-            </div>
+                </>
+            )
+            :
+            <Loading error={statusError} /> }
         </main>
     )
 }

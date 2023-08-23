@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as LeftArrow } from "../../../icons/arrow-left.svg";
 import { ReactComponent as RightLongArrow } from "../../../icons/arrow-long-right.svg";
-import { Link, useNavigate } from "react-router-dom";
 
 function LandingBanner () {
     return <>You need to choose childs</>
@@ -10,6 +10,35 @@ function LandingBanner () {
 function Loading () {
     return (
         <div className="w-full h-[380px] rounded-3xl fronta-loading"></div>
+    )
+}
+
+function OneCategories ({ data }) {
+    const { name, count, anime } = data;
+
+    const bannerUrl = (anime.trailer && anime.trailer.images.maximum_image_url) || anime.images.webp.large_image_url;
+
+    return (
+        <div
+            className="w-full h-[380px] rounded-3xl overflow-x-hidden relative group/bg bg-no-repeat bg-center bg-cover"
+            style={{ backgroundImage: `url(${bannerUrl})` }}
+        >
+            <div className="absolute w-full h-full rounded-[24px] left-0 top-0 bg-black bg-opacity-60"></div>
+            <header className="absolute w-full h-full left-0 top-0 flex flex-row items-center">
+                <div className="flex flex-col px-32 gap-5">
+                    <header className="flex flex-col gap-2">
+                        <h1 className="text-5xl font-montserrat">{name}</h1>
+                        <div className="text-lg font-montserrat">{count} Anime</div>
+                    </header>
+                </div>
+            </header>
+            {anime.title && <Link
+                to={"/anime/" + anime.mal_id}
+                className="absolute right-4 bottom-4 py-1 px-6 bg-dark-primary text-sm text-white hover:text-opacity-100 text-opacity-80 bg-opacity-40 hover:bg-opacity-80 rounded-full backdrop-blur-md transition"
+            >
+                {anime.title_english || anime.title}
+            </Link>}
+        </div>
     )
 }
 
@@ -72,7 +101,9 @@ function ShortChategories ({ data }) {
 }
 
 ShortChategories.Loading = Loading;
+OneCategories.Loading = Loading;
 
 LandingBanner.ShortChategories = ShortChategories;
+LandingBanner.OneCategories = OneCategories;
 
 export default LandingBanner;

@@ -89,12 +89,42 @@ export async function getFullGenres () {
     }
 }
 
+export async function getGenreByName (name) {
+    try {
+        const { data } = await fetchAnime(`https://api.jikan.moe/v4/genres/anime`, { params: { filter: "genres" } });
+        const oneGenre = data.filter((genre) => {
+            return genre.name.toLowerCase().replace(/\s+/g, "-") === name;
+        });
+        return { ...oneGenre[0] };
+    }
+    catch (error) {
+        throw error;
+    }
+}
+
 export function getEpisodeById (id) {
     return fetchAnime(`https://api.jikan.moe/v4/anime/${id}/episodes`);
 }
 
 export function getAnime (id) {
     return fetchAnime(`https://api.jikan.moe/v4/anime/${id}/full`);
+}
+
+export async function getPopularAnimeByGenre (id) {
+    const thisYear = new Date().getFullYear();
+    try {
+        const { data } = await fetchAnime(`https://api.jikan.moe/v4/anime`, {
+            params: {
+                order_by: "popularity",
+                start_date: `${thisYear}-01-23`,
+                genres: id
+            }
+        })
+        return data;
+    }
+    catch (error) {
+        throw error;
+    }
 }
 
 export async function getMultipleAnime (ids) {
