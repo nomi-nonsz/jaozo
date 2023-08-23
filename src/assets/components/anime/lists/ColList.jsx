@@ -92,6 +92,12 @@ function Anime ({ anime }) {
     )
 }
 
+function LongLoading () {
+    return (
+        <div className="h-[280px] rounded-3xl fronta-loading"></div>
+    )
+}
+
 function LongAnime ({ anime }) {
     const navigate = useNavigate();
     const { genres, mal_id, episodes } = anime;
@@ -134,6 +140,8 @@ function Categories ({ data }) {
 function ColList ({ children }) {
     return <div className="col-span-2">{children}</div>
 }
+
+LongAnime.Loading = LongLoading;
 
 ColList.Anime = Anime;
 ColList.Categories = Categories;

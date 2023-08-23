@@ -124,15 +124,15 @@ function Home () {
                 <div className="flex flex-col gap-10 py-5">
                     { hotAnime ?
                         <RowList.Anime title="Hot now 🔥" data={hotAnime.data} /> :
-                        <RowList.Anime.Loading />
+                        <RowList.Anime.Loading title="Hot now 🔥" />
                     }
                     { airingAnime ?
                         <RowList.Anime title="Airing now ✨️" data={airingAnime.data} /> :
-                        <RowList.Anime.Loading />
+                        <RowList.Anime.Loading title="Airing now ✨️" />
                     }
                     { epsAnime ?
                         <RowList.Anime title="Latest Updated Episode 🗣️" data={epsAnime} /> :
-                        <RowList.Anime.Loading />
+                        <RowList.Anime.Loading title="Latest Updated Episode 🗣️" />
                     }
                     { genresAnime ?
                         <RowList.Categories title="By Genres 🤸‍♀️️" data={genresAnime} /> :
@@ -140,15 +140,15 @@ function Home () {
                     }
                     { popularAnime ?
                         <RowList.Anime title="Most Popular 🙌" data={popularAnime.data} /> :
-                        <RowList.Anime.Loading />
+                        <RowList.Anime.Loading title="Most Popular 🙌" />
                     }
                     { topAnime ?
                         <RowList.Anime title="Top Anime 🏅️" data={topAnime.data} /> :
-                        <RowList.Anime.Loading />
+                        <RowList.Anime.Loading title="Top Anime 🏅️" />
                     }
                     { upcomingAnime ?
                         <RowList.Anime title="Coming Soon ⏰" data={upcomingAnime.data} /> :
-                        <RowList.Anime.Loading />
+                        <RowList.Anime.Loading title="Coming Soon ⏰" />
                     }
                 </div>
             </main>

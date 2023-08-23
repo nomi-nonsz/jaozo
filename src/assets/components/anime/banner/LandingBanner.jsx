@@ -7,6 +7,12 @@ function LandingBanner () {
     return <>You need to choose childs</>
 }
 
+function Loading () {
+    return (
+        <div className="w-full h-[380px] rounded-3xl fronta-loading"></div>
+    )
+}
+
 function ShortChategories ({ data }) {
     const navigate = useNavigate();
     const [pointIndex, setIndex] = useState(0);
@@ -55,15 +61,17 @@ function ShortChategories ({ data }) {
                     return <div className={"h-2 bg-white rounded-full transition-all cursor-pointer duration-700 " + (key === pointIndex ? "w-8" : "w-2 opacity-60")} key={key} onClick={() => { setIndex(key) }}></div>
                 })}
             </div>
-            <Link
+            {anime.name && <Link
                 to={"/anime/" + anime.mal_id}
                 className="absolute right-4 bottom-4 py-1 px-6 bg-dark-primary text-sm text-white hover:text-opacity-100 text-opacity-80 bg-opacity-40 hover:bg-opacity-80 rounded-full backdrop-blur-md transition"
             >
                 {anime.name}
-            </Link>
+            </Link>}
         </div>
     )
 }
+
+ShortChategories.Loading = Loading;
 
 LandingBanner.ShortChategories = ShortChategories;
 

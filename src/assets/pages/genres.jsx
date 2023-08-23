@@ -149,10 +149,12 @@ function Genres () {
             <>
                 <div className={"relative before:content-[''] before:pointer-events-none before:z-10 before:absolute before:w-full before:bottom-0 before:h-1/4 before:bg-gradient-to-b before:from-transparent before:to-yawn-primary overflow-y-hidden " + (isDroppin ? "h-auto before:hidden" : "h-[720px] before:block")}>
                     <div className="grid grid-cols-2 gap-8">
-                    {trendingAnime.map((anime, key) => {
+                    {trendingAnime ? trendingAnime.map((anime, key) => {
                         return <ColList.LongAnime anime={anime} key={key} />
-                    })}
-                </div>
+                    }) :
+                    [...Array(4)].map((idk, key) => <ColList.LongAnime.Loading key={key} />)
+                    }
+                    </div>
                 </div>
                 <button className="px-12 py-3 mx-auto bg-border-primary bg-opacity-10 hover:bg-opacity-20 rounded-full w-fi transition" onClick={toggleDroppin}>
                     <LeftArrow className={"w-4 -rotate-90 fill-yolo-primary transition " + (isDroppin && "rotate-90")} />
@@ -165,24 +167,25 @@ function Genres () {
         <main className="text-white base-container py-10 flex flex-col gap-14">
             <div className="flex flex-col gap-6">
                 <h1 className="font-montserrat text-2xl">Popular Genres</h1>
-                { popularGenres && 
-                <LandingBanner.ShortChategories data={popularGenres} /> }
+                { popularGenres ? 
+                <LandingBanner.ShortChategories data={popularGenres} /> :
+                <LandingBanner.ShortChategories.Loading />}
             </div>
             <div className="grid grid-cols-10 gap-10">
                 <div className="flex flex-col gap-6 col-span-8">
                     <h1 className="font-montserrat text-2xl">Genres from trending anime</h1>
-                    { trendingAnime && (
-                        <DoropAnime />
-                    )}
+                    <DoropAnime />
                 </div>
                 <div className="flex flex-col gap-6 col-span-2">
                     <h1 className="font-montserrat text-2xl">Most Genres</h1>
                     <div className="flex flex-col gap-3">
-                        { mostGenres && (
+                        { mostGenres ? (
                             mostGenres.map(({ name, count, url }, key) => {
                                 return <BurriedLists.List name={name} count={count} url={url} key={key} />
-                            })
-                        ) }
+                            }))
+                            :
+                            [...Array(6)].map((idk, key) => <BurriedLists.Loading key={key} />)
+                        }
                     </div>
                 </div>
             </div>
