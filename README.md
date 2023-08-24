@@ -36,7 +36,7 @@ this project uses yarn for the script package so it affects the guide, maybe you
 if you want to build this project use the following command
 
 ```bash
-yarn tbuild && yarn vite build
+yarn build
 ```
 
 ### Additional scripts
@@ -47,13 +47,6 @@ yarn tbuild && yarn vite build
 
     ```
     yarn twatch
-    ```
-- ### tbuild
-    
-    For build CSS, smaller size. it run `tailwindcss -i ./src/input.css -o ./src/App.css --watch`
-
-    ```
-    yarn build
     ```
 
 # Contribution
