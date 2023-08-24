@@ -7,7 +7,7 @@ function Anime ({ anime }) {
     if (!anime) {
         return (
             <div className="col-span-2 flex flex-col gap-5">
-                <div className="w-full h-[350px] fronta-loading rounded-md"></div>
+                <div className="w-full h-[350px] fronta-loading rounded-xl"></div>
                 <div className="flex flex-col gap-3">
                     <div className="w-[80%] fronta-loading h-8 rounded"></div>
                     <div className="w-[30%] fronta-loading h-5 rounded"></div>
@@ -25,7 +25,7 @@ function Anime ({ anime }) {
             <Link to={"/anime/" + (anime.mal_id || anime.entry.mal_id)} className="flex flex-col gap-1">
                 <figure className="w-full h-[350px] relative">
                     <img
-                        className="w-full h-full object-cover rounded-md group-hover:opacity-60 duration-200"
+                        className="w-full h-full object-cover rounded-xl group-hover:opacity-60 duration-200"
                         srcSet={anime.images ? anime.images.webp.image_url : anime.entry.images.webp.image_url}
                         alt=""
                     />
