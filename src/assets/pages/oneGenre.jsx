@@ -46,7 +46,7 @@ function OneGenre () {
             <div className="grid grid-cols-10 gap-12">
                 <div className="col-span-7 flex flex-col gap-6">
                     <h1 className="font-montserrat text-2xl">Browse Anime</h1>
-                    <div className="grid grid-cols-6 gap-6">
+                    <div className="grid grid-cols-6 gap-x-6 gap-y-14">
                         { allAnime ?
                         allAnime.map((nimej, key) => {
                             return <div className="col-span-2"><ColList.Anime anime={nimej} key={key} /></div>
