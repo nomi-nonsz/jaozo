@@ -129,7 +129,7 @@ export async function getPopularAnimeByGenre (id) {
 
 export async function getAnimeByGenre (id, page) {
     try {
-        const { data } = await fetchAnime(`https://api.jikan.moe/v4/anime`, {
+        const data = await fetchAnime(`https://api.jikan.moe/v4/anime`, {
             params: {
                 genres: id,
                 page: page || 1
