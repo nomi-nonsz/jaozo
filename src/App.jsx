@@ -4,7 +4,7 @@ import "./dist/main.css"; // the css
 import { getGenres } from "./lib/anime-api"; // that api script
 
 // Static components
-import Navbar from "./assets/components/Navbar";
+import Navbar from "./assets/components/navbar/Navbar";
 import Footer from "./assets/components/Footer";
 
 // Pages
