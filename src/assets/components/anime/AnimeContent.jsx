@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import FButton from '../buttons/FButton';
-import EpisodeGrid from './EpisodeGrid';
+import Episodes from './lists/episodes/Episodes';
 import { ReactComponent as StarIcon } from '../../icons/star.svg';
 import { ReactComponent as PlayIcon } from '../../icons/play.svg';
 import { ReactComponent as MarkIcon } from '../../icons/mark.svg';
+import { ReactComponent as GridIcon } from '../../icons/grid.svg';
+import { ReactComponent as RowIcon } from '../../icons/row.svg';
 import { Link } from 'react-router-dom';
+import HeaderButton from '../buttons/header/HeaderButton';
 
 function AnimeContent ({animeData, episodeData}) {
     const { data } = animeData;
@@ -26,8 +29,6 @@ function AnimeContent ({animeData, episodeData}) {
     const [expandSynopsis, toggleSynopsis] = useState(false);
     const synopsisMaxLength = 150;
 
-    const [expandEpisodes, toggleEpisodes] = useState(false);
-
     function TagsElement ({ to, children }) {
         return (
             <Link to={to}>
@@ -36,8 +37,24 @@ function AnimeContent ({animeData, episodeData}) {
         );
     }
 
+    function EpisodeSection () {
+        const [rowMode, setRowMode] = useState(true);
+
+        return (
+            <section className="flex flex-col gap-6">
+                <header className='font-montserrat flex justify-between items-center'>
+                    <h2 className='text-2xl'>Episodes</h2>
+                    <HeaderButton onClick={() => setRowMode(!rowMode)}>
+                        {rowMode == true ? <RowIcon className="w-5 h-5" /> : <GridIcon className="w-5 h-5" />}
+                    </HeaderButton>
+                </header>
+                <Episodes episodes={episodes} images={trailerImage} mode={rowMode == true && 'col'} />
+            </section>
+        )
+    }
+
     return (
-    <div className='flex flex-col gap-6 pt-10'>
+    <div className='flex flex-col gap-20 pt-10'>
         <section className='flex flex-col md:flex-row gap-8'>
             <div className="relative md:flex-1 w-full h-[315px] md:w-[560px] md:h-[315px]">
                 <iframe
@@ -141,40 +158,7 @@ function AnimeContent ({animeData, episodeData}) {
                 </div>
             </div>
         </section>
-        <hr />
-        <section className="flex flex-col gap-4">
-            <header>
-                <h2 className='text-xl'>Episodes</h2>
-            </header>
-            <div
-                className={(!expandEpisodes && "hidden-content") + `
-                    relative
-                    grid
-                    grid-cols-1
-                    xs:grid-cols-2
-                    md:grid-cols-3
-                    xl:grid-cols-4
-                    gap-4
-                    overflow-y-hidden`}
-                style={{ height: expandEpisodes ? "fit-content" : "480px" }}>
-                { episodes.map((episode, key) => {
-                    return (
-                        <EpisodeGrid
-                            key={key}
-                            id={episode.mal_id}
-                            title={episode.title}
-                            img={trailerImage}
-                        />
-                    )
-                }) }
-                {episodes.length >= 8 && 
-                    <button className={"absolute inset-x-0 mx-0 z-10 text-lg text-pit-primary " + (expandEpisodes ? "-bottom-1" : "bottom-5")} onClick={() => { toggleEpisodes(!expandEpisodes) }}>
-                        {expandEpisodes ? "Show less" : "Show more episodes"}
-                    </button>
-                }
-            </div>
-        </section>
-        <hr />
+        <EpisodeSection />
     </div>
     )
 }
