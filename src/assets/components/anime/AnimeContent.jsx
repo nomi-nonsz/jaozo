@@ -9,12 +9,14 @@ import { ReactComponent as RowIcon } from '../../icons/row.svg';
 import { Link } from 'react-router-dom';
 import HeaderButton from '../buttons/header/HeaderButton';
 import Section from '../sections/Section';
+import NoB from "../../images/no.png";
 
 function AnimeContent ({animeData, episodeData}) {
     const { data } = animeData;
     const {
         status,
         genres,
+        type,
         themes,
         synopsis,
         score,
@@ -41,11 +43,15 @@ function AnimeContent ({animeData, episodeData}) {
     function EpisodeSection () {
         const [rowMode, setRowMode] = useState(true);
 
+        const toggleMode = () => {
+            if (episodes.length > 0) setRowMode(!rowMode)
+        }
+
         return (
             <Section>
                 <header className='font-montserrat flex justify-between items-center'>
                     <h2 className='text-2xl'>Episodes</h2>
-                    <HeaderButton onClick={() => setRowMode(!rowMode)}>
+                    <HeaderButton onClick={toggleMode}>
                         {rowMode == true ? <RowIcon className="w-5 h-5" /> : <GridIcon className="w-5 h-5" />}
                     </HeaderButton>
                 </header>
@@ -89,13 +95,16 @@ function AnimeContent ({animeData, episodeData}) {
                         rounded-xl
                         bg-cover
                         bg-no-repeat
+                        bg-center
                         w-full
                         h-full
                     `}
                     style={{
-                        backgroundImage: `url('${trailerImage}')`
+                        backgroundImage: trailerImage ? `url('${trailerImage}')` : `url('${NoB}')`
                     }}
-                ></div>
+                >
+                    {episodes < 1 && <p className='absolute left-1/2 -translate-x-1/2 bottom-6 text-2xl font-bold'>No Preview?</p>}
+                </div>
             </div>
             <div className="text-white md:flex-1 flex flex-col gap-4">
                 <header className='font-bold font-montserrat'>
@@ -159,7 +168,7 @@ function AnimeContent ({animeData, episodeData}) {
                 </div>
             </div>
         </section>
-        <EpisodeSection />
+        {type === 'TV' || type === 'OVA' && <EpisodeSection />}
     </div>
     )
 }

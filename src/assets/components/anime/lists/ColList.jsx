@@ -77,15 +77,18 @@ function Anime ({ anime }) {
                     {anime.title_english ? anime.title_english : (anime.title ? anime.title : anime.entry.title)}
                 </div>
                 <div className="text-white opacity-50 text-sm">
-                    {!Array.isArray(anime.episodes) ?
-                        <>{anime.episodes} Episodes</> :
-                        <>
-                            Updated {anime.episodes.map((ep, i) => {
-                                return ep.title.split(" ")[1] + (i < anime.episodes.length - 1 ? ", " : " ")
-                            })}
-                            {anime.episodes.length > 0 ? "Episodes" : "Episode"}
-                        </>
-                    }
+                    {anime.type === 'TV' || anime.type === 'OVA' ? (
+                        !Array.isArray(anime.episodes) ?
+                            <>{anime.episodes} Episodes</> :
+                            <>
+                                Updated {anime.episodes.map((ep, i) => {
+                                    return ep.title.split(" ")[1] + (i < anime.episodes.length - 1 ? ", " : " ")
+                                })}
+                                {anime.episodes.length > 0 ? "Episodes" : "Episode"}
+                            </>
+                        
+                    ) :
+                    anime.type}
                 </div>
             </Link>
         </div>

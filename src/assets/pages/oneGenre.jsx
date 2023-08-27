@@ -64,7 +64,7 @@ function OneGenre () {
             { genre ?
             <LandingBanner.OneCategories data={genre} /> : <LandingBanner.OneCategories.Loading />
             }
-            <FefoGrid gap={12}>
+            <FefoGrid gap={20}>
                 <Section className={"col-span-7"}>
                     <Header>Browse Anime</Header>
                     <div className="grid grid-cols-6 gap-x-6 gap-y-14">
