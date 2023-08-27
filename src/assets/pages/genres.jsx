@@ -7,6 +7,9 @@ import BurriedLists from "../components/anime/lists/BurriedList";
 import { ReactComponent as LeftArrow } from "../icons/arrow-left.svg";
 import SearchBar from "../components/SearchBar";
 import Loading from "../components/anime/Loading";
+import Section from "../components/sections/Section";
+import FefoGrid from "../components/sections/FefoGrids";
+import Header from "../components/sections/Header";
 
 function Genres () {
     let isRequest = false;
@@ -177,19 +180,19 @@ function Genres () {
         <main className="text-white base-container py-10 flex flex-col gap-14">
             {!statusError ? (
                 <>
-                <div className="flex flex-col gap-6">
-                    <h1 className="font-montserrat text-2xl">Popular Genres</h1>
+                <Section>
+                    <Header>Popular Genres</Header>
                     { popularGenres ? 
                     <LandingBanner.ShortChategories data={popularGenres} /> :
                     <LandingBanner.ShortChategories.Loading />}
-                </div>
-                <div className="grid grid-cols-10 gap-10">
+                </Section>
+                <FefoGrid gap={10}>
                     <div className="flex flex-col gap-6 col-span-8">
-                        <h1 className="font-montserrat text-2xl">Genres from trending anime</h1>
+                        <Header>Genres from trending anime</Header>
                         <DoropAnime />
                     </div>
                     <div className="flex flex-col gap-6 col-span-2">
-                        <h1 className="font-montserrat text-2xl">Most Genres</h1>
+                        <Header>Most Genres</Header>
                         <div className="flex flex-col gap-3">
                             { mostGenres ? (
                                 mostGenres.map(({ name, count, url }, key) => {
@@ -200,17 +203,17 @@ function Genres () {
                             }
                         </div>
                     </div>
-                </div>
-                <div className="grid grid-cols-10 gap-10">
+                </FefoGrid>
+                <FefoGrid gap={10}>
                     <div className="flex flex-col gap-8 col-start-2 col-span-8">
-                        <h1 className="font-montserrat text-center text-2xl">Browse All Genres</h1>
+                        <Header className="text-center">Browse All Genres</Header>
                         <div className="flex flex-col gap-3 text-center">
                             <SearchBar placeholder="Find genre" theme="darked" handleSearch={handleSearch} />
                             <p className="opacity-30">// bro actually you don't need a search bar because all genres are fewer</p>
                         </div>
                         { allGenres && <ListGenres /> }
                     </div>
-                </div>
+                </FefoGrid>
                 </>
             )
             :

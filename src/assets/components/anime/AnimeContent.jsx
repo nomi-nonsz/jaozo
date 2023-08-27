@@ -8,6 +8,7 @@ import { ReactComponent as GridIcon } from '../../icons/grid.svg';
 import { ReactComponent as RowIcon } from '../../icons/row.svg';
 import { Link } from 'react-router-dom';
 import HeaderButton from '../buttons/header/HeaderButton';
+import Section from '../sections/Section';
 
 function AnimeContent ({animeData, episodeData}) {
     const { data } = animeData;
@@ -41,7 +42,7 @@ function AnimeContent ({animeData, episodeData}) {
         const [rowMode, setRowMode] = useState(true);
 
         return (
-            <section className="flex flex-col gap-6">
+            <Section>
                 <header className='font-montserrat flex justify-between items-center'>
                     <h2 className='text-2xl'>Episodes</h2>
                     <HeaderButton onClick={() => setRowMode(!rowMode)}>
@@ -49,7 +50,7 @@ function AnimeContent ({animeData, episodeData}) {
                     </HeaderButton>
                 </header>
                 <Episodes episodes={episodes} images={trailerImage} mode={rowMode == true && 'col'} />
-            </section>
+            </Section>
         )
     }
 

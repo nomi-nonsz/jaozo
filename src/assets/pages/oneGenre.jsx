@@ -6,10 +6,11 @@ import ColList from "../components/anime/lists/ColList";
 import MogureList from "../components/anime/lists/MogureList";
 import NotFound404 from "./NotFound404";
 import PageButtons from "../components/buttons/PageButton";
+import FefoGrid from "../components/sections/FefoGrids";
+import Section from "../components/sections/Section";
+import Header from "../components/sections/Header";
 
 function OneGenre () {
-    const navigate  = useNavigate();
-
     const { name: genreParam } = useParams();
     const location = useLocation();
     const pageParams = new URLSearchParams(location.search);
@@ -63,9 +64,9 @@ function OneGenre () {
             { genre ?
             <LandingBanner.OneCategories data={genre} /> : <LandingBanner.OneCategories.Loading />
             }
-            <div className="grid grid-cols-10 gap-12">
-                <div className="col-span-7 flex flex-col gap-6">
-                    <h1 className="font-montserrat text-2xl">Browse Anime</h1>
+            <FefoGrid gap={12}>
+                <Section className={"col-span-7"}>
+                    <Header>Browse Anime</Header>
                     <div className="grid grid-cols-6 gap-x-6 gap-y-14">
                         { allAnime ?
                         allAnime.map((nimej, key) => {
@@ -79,9 +80,9 @@ function OneGenre () {
                             <PageButtons pagination={pagination} />
                         </div>
                     }
-                </div>
-                <div className="col-span-3 flex flex-col gap-6">
-                    <h1 className="font-montserrat text-2xl">Popular {genre && genre.name}</h1>
+                </Section>
+                <Section className={"col-span-3"}>
+                    <Header>Popular {genre && genre.name}</Header>
                     <div className="flex flex-col gap-8">
                         { anime ? anime.map((nimej, key) => {
                             return <MogureList.Anime anime={nimej} key={key} />
@@ -90,8 +91,8 @@ function OneGenre () {
                         [...Array(8)].map(() => <MogureList.Loading />)
                         }
                     </div>
-                </div>
-            </div>
+                </Section>
+            </FefoGrid>
         </div>
     )
 }
