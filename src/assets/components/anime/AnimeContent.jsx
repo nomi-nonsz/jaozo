@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FButton from '../buttons/FButton';
 import Episodes from './lists/episodes/Episodes';
 import { ReactComponent as StarIcon } from '../../icons/star.svg';
@@ -39,6 +39,10 @@ function AnimeContent ({animeData, episodeData}) {
             </Link>
         );
     }
+
+    useEffect(() => {
+        console.log(type);
+    }, []);
 
     function EpisodeSection () {
         const [rowMode, setRowMode] = useState(true);
@@ -168,7 +172,7 @@ function AnimeContent ({animeData, episodeData}) {
                 </div>
             </div>
         </section>
-        {type === 'TV' || type === 'OVA' && <EpisodeSection />}
+        {(type === 'TV' || type === 'OVA') && <EpisodeSection />}
     </div>
     )
 }

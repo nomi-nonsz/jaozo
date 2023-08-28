@@ -2,6 +2,7 @@ import axios from "axios";
 
 // backend url
 const BACKEND_DOMAIN = import.meta.env.VITE_HOSTED_BACKEND || import.meta.env.VITE_LOCAL_BACKEND;
+const JIKAN_URL = "https://api.jikan.moe/v4";
 
 /* ------------------------- */
 // 
@@ -16,10 +17,10 @@ const BACKEND_DOMAIN = import.meta.env.VITE_HOSTED_BACKEND || import.meta.env.VI
 // 
 /* ------------------------- */
 
-async function fetchAnime (url, config) {
+async function fetchAnime (endpoint, config) { // idk what endpoint and route is that
     try {
-        console.log(`Make request for ${url}`)
-        const response = await axios.get(url, config);
+        console.log(`Make request for ${JIKAN_URL + endpoint}`)
+        const response = await axios.get(JIKAN_URL + endpoint, config);
         console.log(`Get data from response`);
         const data = await response.data;
         
@@ -56,7 +57,7 @@ async function fetchAnime (url, config) {
 // nyoba ngambil genre, tapi dikembalikan dalam bentuk objek
 export async function getGenres () {
     try {
-        const res = await fetchAnime(`https://api.jikan.moe/v4/genres/anime`, { params: { filter: "genres" } });
+        const res = await fetchAnime(`/genres/anime`, { params: { filter: "genres" } });
         const populary = res.data;
         const genres = [];
 
@@ -75,7 +76,7 @@ export async function getGenres () {
 
 export async function getFullGenres () {
     try {
-        const res = await fetchAnime(`https://api.jikan.moe/v4/genres/anime`, { params: { filter: "genres" } });
+        const res = await fetchAnime(`/genres/anime`, { params: { filter: "genres" } });
         
         const genres = res.data.map((genre) => {
             genre.url = `/genre/${genre.name.toLowerCase()}`.replace(/\s+/g, "-");
@@ -91,7 +92,7 @@ export async function getFullGenres () {
 
 export async function getGenreByName (name) {
     try {
-        const { data } = await fetchAnime(`https://api.jikan.moe/v4/genres/anime`, { params: { filter: "genres" } });
+        const { data } = await fetchAnime(`/genres/anime`, { params: { filter: "genres" } });
         const oneGenre = data.filter((genre) => {
             return genre.name.toLowerCase().replace(/\s+/g, "-") === name;
         });
@@ -103,17 +104,17 @@ export async function getGenreByName (name) {
 }
 
 export function getEpisodeById (id) {
-    return fetchAnime(`https://api.jikan.moe/v4/anime/${id}/episodes`);
+    return fetchAnime(`/anime/${id}/episodes`);
 }
 
 export function getAnime (id) {
-    return fetchAnime(`https://api.jikan.moe/v4/anime/${id}/full`);
+    return fetchAnime(`/anime/${id}/full`);
 }
 
 export async function getPopularAnimeByGenre (id) {
     const thisYear = new Date().getFullYear();
     try {
-        const { data } = await fetchAnime(`https://api.jikan.moe/v4/anime`, {
+        const { data } = await fetchAnime(`/anime`, {
             params: {
                 order_by: "popularity",
                 start_date: `${thisYear}-01-23`,
@@ -129,7 +130,7 @@ export async function getPopularAnimeByGenre (id) {
 
 export async function getAnimeByGenre (id, page) {
     try {
-        const data = await fetchAnime(`https://api.jikan.moe/v4/anime`, {
+        const data = await fetchAnime(`/anime`, {
             params: {
                 genres: id,
                 page: page || 1
@@ -158,7 +159,7 @@ export async function getMultipleAnime (ids) {
 
 export async function getTopAnime (filter) {
     try {
-        const data = await fetchAnime(`https://api.jikan.moe/v4/top/anime`, {
+        const data = await fetchAnime(`/top/anime`, {
             params: {
                 filter: filter
             }
@@ -171,7 +172,7 @@ export async function getTopAnime (filter) {
 
 export async function getTrendingAnime () {
     try {
-        const data = await fetchAnime(`https://api.jikan.moe/v4/seasons/now`);
+        const data = await fetchAnime(`/seasons/now`);
         return data;
     } catch (error) {
         throw error;
@@ -180,7 +181,7 @@ export async function getTrendingAnime () {
 
 export async function getLatestEpisode () {
     try {
-        const data = await fetchAnime(`https://api.jikan.moe/v4/watch/episodes`);
+        const data = await fetchAnime(`/watch/episodes`);
         return data;
     } catch (error) {
         throw error;
@@ -189,7 +190,7 @@ export async function getLatestEpisode () {
 
 export async function findAnime (query) {
     try {
-        return await fetchAnime(`https://api.jikan.moe/v4/anime?q="${query}"`);
+        return await fetchAnime(`/anime?q="${query}"`);
     } catch (error) {
         throw error;
     }
