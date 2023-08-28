@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAnime, getEpisodeById } from '../../lib/anime-api';
+import { getAnime, getEpisodeById, getRecommendByAnime } from '../../lib/anime-api';
 import AnimeContent from '../components/anime/AnimeContent';
 import Loading from '../components/anime/Loading';
 
@@ -9,25 +9,31 @@ function Anime () {
     const [dataExist, setExist] = useState(false);
     const [animeData, setData] = useState(null);
     const [episodeData, setEpisode] = useState(null);
+    const [recommendData, setRecommend] = useState(null);
+
+    const fetchAnime = async () => {
+        const anime = await getAnime(animeId);
+        const episodes = await getEpisodeById(animeId);
+        const recommend = await getRecommendByAnime(animeId);
+
+        setData(anime);
+        setEpisode(episodes);
+        setRecommend(recommend);
+    }
 
     useEffect(() => {
-        getAnime(animeId).then(res => {
-            setData(res);
-        });
-        getEpisodeById(animeId).then(res => {
-            setEpisode(res);
-        });
+        fetchAnime();
     }, [animeId]);
 
     useEffect(() => {
-        if (animeData && episodeData) {
+        if (animeData && episodeData && recommendData) {
             setExist(true);
         }
-    }, [animeData, episodeData]);
+    }, [animeData, episodeData, recommendData]);
 
     return (
         <main className="text-white font-noto-sans base-container pb-16">
-            { dataExist ? <AnimeContent animeData={animeData} episodeData={episodeData} /> : <Loading>Fetching Data</Loading> }    
+            { dataExist ? <AnimeContent animeData={animeData} episodeData={episodeData} recommendData={recommendData} /> : <Loading>Fetching Data</Loading> }    
         </main>
     )
 }

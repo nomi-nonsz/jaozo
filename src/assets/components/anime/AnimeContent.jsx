@@ -8,10 +8,13 @@ import { ReactComponent as GridIcon } from '../../icons/grid.svg';
 import { ReactComponent as RowIcon } from '../../icons/row.svg';
 import { Link } from 'react-router-dom';
 import HeaderButton from '../buttons/header/HeaderButton';
+import Header from "../sections/Header";
+import FefoGrids from "../sections/FefoGrids";
 import Section from '../sections/Section';
 import NoB from "../../images/no.png";
+import ColList from './lists/ColList';
 
-function AnimeContent ({animeData, episodeData}) {
+function AnimeContent ({animeData, episodeData, recommendData}) {
     const { data } = animeData;
     const {
         status,
@@ -173,6 +176,18 @@ function AnimeContent ({animeData, episodeData}) {
             </div>
         </section>
         {(type === 'TV' || type === 'OVA') && <EpisodeSection />}
+        <Section>
+            <Header>More like {title}</Header>
+            <FefoGrids gap={6}>
+                {recommendData.map((rec, key) => {
+                    return (
+                        <div className="col-span-2">
+                            <ColList.Anime anime={rec} key={key} />
+                        </div>
+                    )
+                })}
+            </FefoGrids>
+        </Section>
     </div>
     )
 }

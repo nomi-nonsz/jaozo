@@ -179,6 +179,16 @@ export async function getTrendingAnime () {
     }
 }
 
+export async function getRecommendByAnime (id) {
+    try {
+        const { data } = await fetchAnime(`/anime/${id}/recommendations`);
+        return data;
+    }
+    catch (error) {
+        
+    }
+}
+
 export async function getLatestEpisode () {
     try {
         const data = await fetchAnime(`/watch/episodes`);
