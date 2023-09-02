@@ -15,9 +15,9 @@ import RowList from "../components/anime/lists/RowList";
 function Home () {
     const [statusError, setError] = useState(null);
 
-    // const [recomended, setRecommend] = useState(null);
+    const [recomended, setRecommend] = useState(null);
 
-    // Bro is too many 😭️😭️😭️😭️
+    // Bro are too many 😭️😭️😭️😭️
     const { content, setContent } = useContext(FeaturedContext);
     const {
         hot: hotAnime,
@@ -108,8 +108,9 @@ function Home () {
 
         if (isRequest && !isDataExist) {
             setTimeout(() => {
-                fetchAnime();
-                // fetchMultiple();
+                fetchAnime().then(() => {
+                    fetchMultiple();
+                });
             }, 800);
         }
         
@@ -149,6 +150,10 @@ function Home () {
                     { upcomingAnime ?
                         <RowList.Anime title="Coming Soon ⏰" data={upcomingAnime.data} /> :
                         <RowList.Anime.Loading title="Coming Soon ⏰" />
+                    }
+                    { recomended ?
+                        <RowList.Anime title="Recommended" data={recomended.data} /> :
+                        <RowList.Anime.Loading title="Recommended" />
                     }
                 </div>
             </main>
